@@ -56,6 +56,13 @@ COMMENT ON TABLE public.ctl_lenguajes_x_prompts IS 'Relación entre lenguajes de
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_lenguaje IS 'Identificador del lenguajes de programación para el que se probo';
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del prompt creado para ese lenguaje de programación';
 
+-- GRANT PERMISOS
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_lenguajes TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia_dev;
+
 -- INDICES
 
 CREATE INDEX ix_cat_esquemas_des_descripcion ON public.cat_esquemas(des_descripcion);

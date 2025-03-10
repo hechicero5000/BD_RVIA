@@ -227,6 +227,20 @@ COMMENT ON COLUMN public.mov_costos_proyectos.nom_cliente_ia IS 'Nombre del clie
 COMMENT ON COLUMN public.mov_costos_proyectos.val_monto IS 'Costo del proyecto por uso de la IA';
 COMMENT ON COLUMN public.mov_costos_proyectos.des_descripcion IS 'Descripción referente al proyecto o costos generados por la IA';
 
+-- GRANT PERMISOS PARA CADA TABLA
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_roles TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_colaboradores TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_estatus_aplicaciones TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_codigo_fuentes TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_aplicaciones TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_escaneos TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_usuarios_por_aplicaciones TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_aplicaciones_por_escaneos TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.his_seguimiento_modificaciones TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_lenguajes TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_checkmarx TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sysrvia_dev;
+
 -- INDICES 
 CREATE INDEX ix_cat_roles_nom_rol ON public.cat_roles(nom_rol);
 CREATE INDEX ix_cat_roles_num_nivel ON public.cat_roles(num_nivel);
