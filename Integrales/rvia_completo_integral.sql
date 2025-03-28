@@ -462,30 +462,30 @@ COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del
 
 -- GRANT PERMISOS PARA CADA TABLA
 ---***
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_sentencias_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_bito_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_proyectos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales_checkmarx TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_obsoletos_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_obsoletos_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_sentencias_ia TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_sentencias_ia TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_bito_ia TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_proyectos TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales_checkmarx TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_obsoletos_ia TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_obsoletos_ia TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_sentencias_ia TO sysrvia;
 ---***
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_roles TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_colaboradores TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_estatus_aplicaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_codigo_fuentes TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_aplicaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_escaneos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_usuarios_por_aplicaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_aplicaciones_por_escaneos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.his_seguimiento_modificaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_lenguajes TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_checkmarx TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia_dev;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_roles TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_colaboradores TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_estatus_aplicaciones TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_codigo_fuentes TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_aplicaciones TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_escaneos TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_usuarios_por_aplicaciones TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_aplicaciones_por_escaneos TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.his_seguimiento_modificaciones TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_lenguajes TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_checkmarx TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
 
 -- INDICES 
 CREATE INDEX ix_cat_roles_nom_rol ON public.cat_roles(nom_rol);
