@@ -461,69 +461,72 @@ COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_lenguaje IS 'Identificador 
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del prompt creado para ese lenguaje de programación';
 
 ---a2
-CREATE TABLE IF NOT EXISTS public.cat_divisional
+CREATE TABLE IF NOT EXISTS public.cat_divisionales
 (
     num_divisional bigint NOT NULL,
     nom_divisional character varying(60) COLLATE pg_catalog."default" NOT NULL,
     fec_movto timestamp without time zone NOT NULL DEFAULT now(),
     sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_divisional PRIMARY KEY (sec_consecutivo, num_divisional),
-    CONSTRAINT uq_cat_divisional_num_divisional UNIQUE (num_divisional)
+    CONSTRAINT pk_cat_divisionales PRIMARY KEY (sec_consecutivo, num_divisional),
+    CONSTRAINT uq_cat_divisionales_num_divisional UNIQUE (num_divisional)
 ) WITHOUT OIDS;
 
-COMMENT ON TABLE  public.cat_divisional IS 'Datos de los divisionales involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_divisional.num_divisional IS 'Número de empleado del Divisional  (Primary key)';
-COMMENT ON COLUMN public.cat_divisional.nom_divisional IS 'Nombre del Divisional';
-COMMENT ON COLUMN public.cat_divisional.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_divisional.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
+COMMENT ON TABLE  public.cat_divisionales IS 'Datos de los divisionales involucrados en los proyectos';
+COMMENT ON COLUMN public.cat_divisionales.num_divisional IS 'Número de empleado del Divisional  (Primary key)';
+COMMENT ON COLUMN public.cat_divisionales.nom_divisional IS 'Nombre del Divisional';
+COMMENT ON COLUMN public.cat_divisionales.fec_movto IS 'fecha de inserción del movimiento';
+COMMENT ON COLUMN public.cat_divisionales.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
 
-CREATE TABLE IF NOT EXISTS public.cat_nacional
+
+CREATE TABLE IF NOT EXISTS public.cat_nacionales
 (
     num_nacional bigint NOT NULL,
     nom_nacional character varying(60) NOT NULL,
     fec_movto timestamp without time zone NOT NULL DEFAULT now(),
     sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_nacional PRIMARY KEY (sec_consecutivo, num_nacional),
-    CONSTRAINT uq_cat_nacional_num_nacional UNIQUE (num_nacional)
+    CONSTRAINT pk_cat_nacionales PRIMARY KEY (sec_consecutivo, num_nacional),
+    CONSTRAINT uq_cat_nacionales_num_nacional UNIQUE (num_nacional)
 ) WITHOUT OIDS;
 
-COMMENT ON TABLE  public.cat_nacional IS 'Datos de los Nacionales involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_nacional.num_nacional IS 'Número de empleado del Nacional  (Primary key)';
-COMMENT ON COLUMN public.cat_nacional.nom_nacional IS 'Nombre del Nacional';
-COMMENT ON COLUMN public.cat_nacional.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_nacional.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
+COMMENT ON TABLE  public.cat_nacionales IS 'Datos de los Nacionales involucrados en los proyectos';
+COMMENT ON COLUMN public.cat_nacionales.num_nacional IS 'Número de empleado del Nacional  (Primary key)';
+COMMENT ON COLUMN public.cat_nacionales.nom_nacional IS 'Nombre del Nacional';
+COMMENT ON COLUMN public.cat_nacionales.fec_movto IS 'fecha de inserción del movimiento';
+COMMENT ON COLUMN public.cat_nacionales.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
 
-CREATE TABLE IF NOT EXISTS public.cat_coordinador
+
+CREATE TABLE IF NOT EXISTS public.cat_coordinadores
 (
     num_coordinador bigint NOT NULL,
     nom_coordinador character varying(60) NOT NULL,
     fec_movto timestamp without time zone NOT NULL DEFAULT now(),
     sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_coordinador PRIMARY KEY (sec_consecutivo, num_coordinador),
-    CONSTRAINT uq_cat_coordinador_num_coordinador UNIQUE (num_coordinador)
+    CONSTRAINT pk_cat_coordinadores PRIMARY KEY (sec_consecutivo, num_coordinador),
+    CONSTRAINT uq_cat_coordinadores_num_coordinador UNIQUE (num_coordinador)
 ) WITHOUT OIDS;
 
-COMMENT ON TABLE  public.cat_coordinador IS 'Datos de los Coordinadores involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_coordinador.num_coordinador IS 'Número de empleado del Coordinador  (Primary key)';
-COMMENT ON COLUMN public.cat_coordinador.nom_coordinador IS 'Nombre del Coordinador';
-COMMENT ON COLUMN public.cat_coordinador.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_coordinador.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
+COMMENT ON TABLE  public.cat_coordinadores IS 'Datos de los Coordinadores involucrados en los proyectos';
+COMMENT ON COLUMN public.cat_coordinadores.num_coordinador IS 'Número de empleado del Coordinador  (Primary key)';
+COMMENT ON COLUMN public.cat_coordinadores.nom_coordinador IS 'Nombre del Coordinador';
+COMMENT ON COLUMN public.cat_coordinadores.fec_movto IS 'fecha de inserción del movimiento';
+COMMENT ON COLUMN public.cat_coordinadores.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
 
-CREATE TABLE IF NOT EXISTS public.cat_gerente
+
+CREATE TABLE IF NOT EXISTS public.cat_gerentes
 (
     num_gerente bigint NOT NULL,
     nom_gerente character varying(60) COLLATE pg_catalog."default" NOT NULL,
     fec_movto timestamp without time zone NOT NULL DEFAULT now(),
     sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_gerente PRIMARY KEY (sec_consecutivo, num_gerente),
-    CONSTRAINT uq_cat_gerente_num_gerente UNIQUE (num_gerente)
+    CONSTRAINT pk_cat_gerentes PRIMARY KEY (sec_consecutivo, num_gerente),
+    CONSTRAINT uq_cat_gerentes_num_gerente UNIQUE (num_gerente)
 ) WITHOUT OIDS;
 
-COMMENT ON TABLE  public.cat_gerente IS 'Datos de los Gerentes involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_gerente.num_gerente IS 'Número de empleado del Gerente  (Primary key)';
-COMMENT ON COLUMN public.cat_gerente.nom_gerente IS 'Nombre del Gerente';
-COMMENT ON COLUMN public.cat_gerente.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_gerente.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
+COMMENT ON TABLE  public.cat_gerentes IS 'Datos de los Gerentes involucrados en los proyectos';
+COMMENT ON COLUMN public.cat_gerentes.num_gerente IS 'Número de empleado del Gerente  (Primary key)';
+COMMENT ON COLUMN public.cat_gerentes.nom_gerente IS 'Nombre del Gerente';
+COMMENT ON COLUMN public.cat_gerentes.fec_movto IS 'fecha de inserción del movimiento';
+COMMENT ON COLUMN public.cat_gerentes.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
 
 ---a2
 
@@ -554,10 +557,10 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
 ---a2
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_divisional  TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_nacional    TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_coordinador TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_gerente     TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_divisionales  TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_nacionales    TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_coordinadores TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_gerentes     TO sysrvia;
 ---a2
 
 -- INDICES 
@@ -642,21 +645,21 @@ CREATE INDEX ix_ctl_lenguajes_x_prompts_idu_lenguaje ON public.ctl_lenguajes_x_p
 CREATE INDEX ix_ctl_lenguajes_x_prompts_idu_prompt ON public.ctl_lenguajes_x_prompts(idu_prompt);
 
 ---a2
-CREATE INDEX IF NOT EXISTS ix_cat_divisional_keyx ON public.cat_divisional USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_divisional_nom_divisional ON public.cat_divisional USING btree (nom_divisional COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_divisional_num_divisional ON public.cat_divisional USING btree (num_divisional ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_divisionales_keyx ON public.cat_divisionales USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_divisionales_nom_divisional ON public.cat_divisionales USING btree (nom_divisional COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_divisionales_num_divisional ON public.cat_divisionales USING btree (num_divisional ASC NULLS LAST) TABLESPACE pg_default;
 
-CREATE INDEX IF NOT EXISTS ix_cat_nacional_keyx ON public.cat_nacional USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_nacional_nom_nacional ON public.cat_nacional USING btree (nom_nacional COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_nacional_num_nacional ON public.cat_nacional USING btree (num_nacional ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_nacionales_keyx ON public.cat_nacionales USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_nacionales_nom_nacional ON public.cat_nacionales USING btree (nom_nacional COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_nacionales_num_nacional ON public.cat_nacionales USING btree (num_nacional ASC NULLS LAST) TABLESPACE pg_default;
 
-CREATE INDEX IF NOT EXISTS ix_cat_coordinador_keyx ON public.cat_coordinador USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_coordinador_nom_coordinador ON public.cat_coordinador USING btree (nom_coordinador COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_coordinador_num_coordinador ON public.cat_coordinador USING btree (num_coordinador ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_coordinadores_keyx ON public.cat_coordinadores USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_coordinadores_nom_coordinador ON public.cat_coordinadores USING btree (nom_coordinador COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_coordinadores_num_coordinador ON public.cat_coordinadores USING btree (num_coordinador ASC NULLS LAST) TABLESPACE pg_default;
 
-CREATE INDEX IF NOT EXISTS ix_cat_gerente_keyx ON public.cat_gerente USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_gerente_nom_gerente ON public.cat_gerente USING btree (nom_gerente COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_gerente_num_gerente ON public.cat_gerente USING btree (num_gerente ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_gerentes_keyx ON public.cat_gerentes USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_gerentes_nom_gerente ON public.cat_gerentes USING btree (nom_gerente COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
+CREATE INDEX IF NOT EXISTS ix_cat_gerentes_num_gerente ON public.cat_gerentes USING btree (num_gerente ASC NULLS LAST) TABLESPACE pg_default;
 ---a2
 
 

@@ -612,27 +612,27 @@ INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 ---***
 
 ---a2
-INSERT INTO cat_divisional (num_divisional, nom_divisional) VALUES('90017854'::bigint, 'José Guadalupe Mendoza Macías'::varchar);
-INSERT INTO cat_divisional (num_divisional, nom_divisional) VALUES('90028058'::bigint, ' Jesús Arnoldo Vargas Borboa'::varchar);
+INSERT INTO public.cat_divisionales (num_divisional, nom_divisional) VALUES('90017854'::bigint, 'José Guadalupe Mendoza Macías'::varchar);
+INSERT INTO public.cat_divisionales (num_divisional, nom_divisional) VALUES('90028058'::bigint, ' Jesús Arnoldo Vargas Borboa'::varchar);
 
-INSERT INTO cat_nacional(num_nacional, nom_nacional) VALUES('96652551'::integer, 'Teresa Guadalupe Gálvez Gastelum'::varchar);
-INSERT INTO cat_nacional(num_nacional, nom_nacional) VALUES('90203224'::integer, 'Héctor Antonio Cruz Zazueta'::varchar);
+INSERT INTO public.cat_nacionales(num_nacional, nom_nacional) VALUES('96652551'::integer, 'Teresa Guadalupe Gálvez Gastelum'::varchar);
+INSERT INTO public.cat_nacionales(num_nacional, nom_nacional) VALUES('90203224'::integer, 'Héctor Antonio Cruz Zazueta'::varchar);
 
-INSERT INTO cat_coordinador(num_coordinador, nom_coordinador) VALUES('0'::integer, 'cero'::varchar);
-INSERT INTO cat_coordinador(num_coordinador, nom_coordinador) VALUES('91080819'::integer, 'Gilberto Valenzuela Alvarez'::varchar);
-INSERT INTO cat_coordinador(num_coordinador, nom_coordinador) VALUES('91452716'::integer, 'Georgina Maria Del Rosario Gerardo Diaz'::varchar);
-INSERT INTO cat_coordinador(num_coordinador, nom_coordinador) VALUES('90035135'::integer, 'Oscar Alberto Aguilar Aramburo'::varchar);
-INSERT INTO cat_coordinador(num_coordinador, nom_coordinador) VALUES('91187631'::integer, 'Rolando Ponce de León Araujo'::varchar);
+INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('0'::integer, 'cero'::varchar);
+INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('91080819'::integer, 'Gilberto Valenzuela Alvarez'::varchar);
+INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('91452716'::integer, 'Georgina Maria Del Rosario Gerardo Diaz'::varchar);
+INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('90035135'::integer, 'Oscar Alberto Aguilar Aramburo'::varchar);
+INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('91187631'::integer, 'Rolando Ponce de León Araujo'::varchar);
 
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('0'::integer, 'Cero'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('90329121'::integer, 'José Arturo Solís Ramírez'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('96665701'::integer, 'Cristabel Silva Barraza'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('92474934'::integer, 'Marcos Antonio Cuevas Rodríguez'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('95657861'::integer, 'Yareli Lizeth Calderon Coronel'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('92102115'::integer, 'Claudia Batiz Beltrán'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('92853341'::integer, 'Roberto Carlos Santillán Torres'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('94812519'::integer, 'Teofilo Inzunza Payán'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('94353638'::integer, 'Ruben Octavio Manjarrez Hernández'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('91712467'::integer, 'José Rodolfo Uriarte Ramírez'::varchar);
-INSERT INTO cat_gerente(num_gerente, nom_gerente) VALUES('95555897'::integer, 'Sofia Carrazco Valenzuela'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('0'::integer, 'Cero'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('90329121'::integer, 'José Arturo Solís Ramírez'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('96665701'::integer, 'Cristabel Silva Barraza'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('92474934'::integer, 'Marcos Antonio Cuevas Rodríguez'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('95657861'::integer, 'Yareli Lizeth Calderon Coronel'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('92102115'::integer, 'Claudia Batiz Beltrán'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('92853341'::integer, 'Roberto Carlos Santillán Torres'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('94812519'::integer, 'Teofilo Inzunza Payán'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('94353638'::integer, 'Ruben Octavio Manjarrez Hernández'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('91712467'::integer, 'José Rodolfo Uriarte Ramírez'::varchar);
+INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('95555897'::integer, 'Sofia Carrazco Valenzuela'::varchar);
 ---a2
