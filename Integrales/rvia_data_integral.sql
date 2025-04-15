@@ -1,12 +1,106 @@
 --- INSERT RVIA
 
-    -- TBL_ROLE
+---a1
+    -- cat_puestos
+INSERT INTO public.cat_puestos (num_puesto, nom_puesto) VALUES ('1'::smallint, 'Divisional'::varchar);
+INSERT INTO public.cat_puestos (num_puesto, nom_puesto) VALUES ('2'::smallint, 'Nacional'::varchar);
+INSERT INTO public.cat_puestos (num_puesto, nom_puesto) VALUES ('3'::smallint, 'Coordinador'::varchar);
+INSERT INTO public.cat_puestos (num_puesto, nom_puesto) VALUES ('4'::smallint, 'Gerente'::varchar);
+INSERT INTO public.cat_puestos (num_puesto, nom_puesto) VALUES ('5'::smallint, 'Colaborador'::varchar);
+
+    -- cat_centros
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('230190'::int, 'CLCN SIST PROG IV SERV FINANCIEROS'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('230578'::int, 'CLCN DESARROLLO SIST A+B VI'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231637'::int, 'CLCN REMED DE VUL RETAIL'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231639'::int, 'CLCN RV DESARROLLO RETAIL I'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231640'::int, 'CLCN RV DESARROLLO RETAIL II'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231641'::int, 'CLCN RV DESARROLLO RETAIL III'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231642'::int, 'CLCN RV DESARROLLO RETAIL IV'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231643'::int, 'CLCN RV DESARROLLO OM Y SF I'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231644'::int, 'CLCN RV DESARROLLO OM Y SF II'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231645'::int, 'CLCN RV DESARROLLO OM Y SF III'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231646'::int, 'CLCN RV DESARROLLO OM Y SF IV'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('231649'::int, 'CLCN RV PROY INFRAESTRUCTURA'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('232390'::int, 'CLCN REMED DE VUL OMNIC Y SF'::varchar);
+INSERT INTO public.cat_centros (num_centro, nom_centro) VALUES ('232490'::int, 'CLCN ANALISIS DE REQ AFORE'::varchar);
+
+    -- cat_aplicaciones_IA
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Joyas de la corona Cartera: (*Cartera Central) (*Cartera en Línea)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Joya Corona BanCoppel (Core bancario: Banca personal, Banca empresarial)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('NPV (Préstamos, Venta crédito y contado ropa muebles, abonos)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Coppel.com (Venta servicios Coppel, medios de pago+antifraude, marketplace, cliente digital, préstamos personales, App Coppel)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Joya AFORE (Safre, afore global, afore.com)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Ofi Web'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Alta Única'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Servicio Remesas'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Coppel Pay'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Clientes Nuevos'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Afore Coppel (retiros parciales, retiros totales, afiliación registros, afiliación traspasos, aportaciones voluntarias)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Banca Móvil'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Corresponsales Coppel'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Club de protección'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Servicio Ventas Motos'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Coppel.com.ar'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('SSO/Authetication (IDC - SSO Azure)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Planes Tarifarios'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Pago con tarjeta'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Cedis'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('CEDIS Texcoco'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Contactabilidad'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Servicio listado de la cobranza'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('GCD Argentina'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Nómina'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema SAJ'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Colaborapp'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Intranet'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Portal de Proveedores'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Mantenimiento Regional'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Servicio ARCO'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Smail'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Indeval'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('SPEI'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('App Afore móvil'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Portal China'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Portal Kraken'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Línea de Denuncia'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('HBB Internet'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Co Crea'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Orion'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('SOC'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Normatividad Afore'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('BPI Personas Físicas'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Empresanet'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Buscador Omnicanal'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Portal Compras'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Recepción de mercancía proveedor muebles'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('WhatsApp Abonos'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sana tu deuda'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Capacitaciones Afore'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Gastos de viaje'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema OFI'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Compra de mobiliario de exhibición'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Aforecoppel.com'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Estado de Cuenta'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Menú Operaciones Afore'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Infraestructura (Administración de Portal de Asistencia TI, Administración de Servicios DNS Internos, Administración Directorio Activo (AD Connect); Administración Directorio Activo (AD Manager); Administración Directorio Activo (Azure AD Cloud); Administración Directorio Activo On Premise, Colector de Agentes CMDB Proxy1, Monitoreo de Infraestructura, Linux)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Inteligencia y Prevención del Delito (Control de Acceso a instalaciones, EMCS PACOM Alarma, Monitoreo a Cámaras, Monitoreo de Unidades de Transporte)'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Auditoría'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Facturación Electrónica Argentina'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Legado Tiendas Ropa'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Legado Tiendas Muebles'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Legado Tiendas Cajas'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Legado Tiendas Clientes Nuevos'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistema Legado Tiendas Atención y Servicios'::varchar);
+INSERT INTO public.cat_aplicaciones_IA (nom_aplicacion) VALUES ('Sistemas Biométricos'::varchar);
+---a1
+
+    -- cat_roles
 INSERT INTO public.cat_roles (nom_rol, num_nivel) VALUES ('560d8d05cfacc7ea2dae3c177ee41032:5cc44baca89a4f886de66004424365ce', 0); -- Administrador
 INSERT INTO public.cat_roles (nom_rol, num_nivel) VALUES ('5ab4703fc4b825f24ea82846be79afc0:60ab1450601d55d1f02a7d56bd826f76', 1); -- Autorizador
 INSERT INTO public.cat_roles (nom_rol, num_nivel) VALUES ('0daa2f33f60b83f71d7fb413af2cb021:04add2fdaa8b917bfd922138cd2e3ba8', 2); -- Usuario
 INSERT INTO public.cat_roles (nom_rol, num_nivel) VALUES ('30b8c410e6269fa777611d55484d1b4b:af90f2d60ae3f5be722fffcaa64fb90d', 3); -- Invitado
  
-    -- public.ctl_estatus_aplicaciones
+    -- ctl_estatus_aplicaciones
 INSERT INTO public.ctl_estatus_aplicaciones (des_estatus_aplicacion) VALUES ('8d4eeca7beca562d3ae13d6c9bf37a4c:e8f47083f14f62866b125983e3d29972'); --En proceso 
 INSERT INTO public.ctl_estatus_aplicaciones (des_estatus_aplicacion) VALUES ('801fd9ca729ba4aab550f9d7e3e2a1f1:7f8bac24bafc70e6c1dfbf9c49945294'); --En espera 
 INSERT INTO public.ctl_estatus_aplicaciones (des_estatus_aplicacion) VALUES ('cc2e2fc966d95e1c8a1154f9100c0d90:76c6a68d933c01addf108e6a1159e948'); --Finalizado 
@@ -66,16 +160,16 @@ INSERT INTO public.cat_lenguajes (idu_lenguaje,nom_lenguaje, fec_creacion) VALUE
 ON CONFLICT (idu_lenguaje) DO NOTHING;
 
 -- cat_esquemas
-INSERT INTO cat_esquemas (idu_esquema, des_descripcion) VALUES (0, 'RTF');
-INSERT INTO cat_esquemas (idu_esquema, des_descripcion) VALUES (1, 'TAO');
-INSERT INTO cat_esquemas (idu_esquema, des_descripcion) VALUES (2, 'BAB');
-INSERT INTO cat_esquemas (idu_esquema, des_descripcion) VALUES (3, 'CARE');
+INSERT INTO public.cat_esquemas (idu_esquema, des_descripcion) VALUES (0, 'RTF');
+INSERT INTO public.cat_esquemas (idu_esquema, des_descripcion) VALUES (1, 'TAO');
+INSERT INTO public.cat_esquemas (idu_esquema, des_descripcion) VALUES (2, 'BAB');
+INSERT INTO public.cat_esquemas (idu_esquema, des_descripcion) VALUES (3, 'CARE');
 
 --- INSERT PROMPTS
 
 ---***
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(1, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(1, 1,
 'Task:
 Given a PHP code snippet, perform the following operations.
 Action:
@@ -111,7 +205,7 @@ Objective:
 Obtain a revised and secure PHP code file with vulnerabilities fixed, adhering to the original code structure and style.',
 'NOW()', 10, 'Comentarios', true, 1);
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(2, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(2, 1,
 'Task:
 Given a Python code snippet, perform the following operations.
 Action:
@@ -146,7 +240,7 @@ Obtain a revised and secure Python code file with vulnerabilities fixed, adherin
 ',
 'NOW()', 10, 'Comentarios', true, 1);
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(3, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(3, 1,
 'Task:
 Given a Java code snippet, perform the following operations.
 Action:
@@ -179,7 +273,7 @@ Objective:
 Obtain a revised and secure Java code file with vulnerabilities fixed, adhering to the original code structure and style.',
 'NOW()', 10, 'Comentarios', true, 1);
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(4, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(4, 1,
 'Task:
 Given a JavaScript code snippet, perform the following operations.
 Action:
@@ -215,7 +309,7 @@ Obtain a revised and secure JavaScript code file with vulnerabilities fixed, adh
 ',
 'NOW()', 10, 'Comentarios', true, 1);
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(5, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(5, 1,
 'Task:
 Given a C# code snippet, perform the following operations.
 Action:
@@ -248,7 +342,7 @@ Objective:
 Obtain a revised and secure C# code file with vulnerabilities fixed, adhering to the original code structure and style.',
 'NOW()', 10, 'Comentarios', true, 1);
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(6, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(6, 1,
 'Task:
 Given a C or C++ code snippet, perform the following operations.
 Action:
@@ -283,7 +377,7 @@ Objective:
 Obtain a revised and secure C/C++ code file with vulnerabilities fixed, adhering to the original code structure and style.',
 'NOW()', 10, 'Comentarios', true, 1);
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(7, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(7, 1,
 'Task:
 Given a C or C++ code snippet, perform the following operations.
 Action:
@@ -319,7 +413,7 @@ Obtain a revised and secure C/C++ code file with vulnerabilities fixed, adhering
 'NOW()', 10, 'Comentarios', true, 1);
 
 
-INSERT INTO mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(34, 1,
+INSERT INTO public.mae_prompts( idu_prompt, idu_esquema, body, fec_creacion, num_efectividad, des_comentarios, opc_es_activo, num_accion ) VALUES(34, 1,
 'Task:
 Given a TypeScript code snippet, perform the following operations.
 Action:
@@ -352,47 +446,47 @@ Obtain a revised and secure TypeScript code file with vulnerabilities fixed, adh
 'NOW()', 10, 'Comentarios', true, 1);
 
 
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(1, 1);   --PHP
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(2, 2);   --Python
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(3, 3);   --Java
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(4, 4);   --JavaScript
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(5, 5);   --C#
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(6, 6);   --C
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(7, 7);   --CPP
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(8, 8);    --CSS
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(9, 9);   --Clojure
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(10, 10), --Dart
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(11, 11); --Elixir
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(12, 12); --Erlang
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(13, 13); --Fortran
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(14, 14); --Go
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(15, 15); --GoogleSQL
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(16, 16); --Groovy
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(17, 17); --Haskell
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(18, 18); --HTML
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(19, 19); --JavaServer Pages
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(20, 20); --Kotlin
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(21, 21); --Lean (proof assistant)
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(22, 22); --Lua
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(23, 23); --Objective-C
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(24, 24); --OCaml
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(25, 25); --Perl
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(26, 26); --R
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(27, 27); --Ruby
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(28, 28); --Rust
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(29, 29); --Scala
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(30, 30); --Shell script
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(31, 31); --Solidity
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(32, 32); --SQL
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(33, 33); --Swift
-INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(34, 34); --TypeScript
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(35, 35); --XML
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(36, 36); --Verilog
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(37, 37); --YAML
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(38, 38); --Visual Basic 
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(39, 39); --Visual Basic .NET
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(40, 40); --VUE
---INSERT INTO ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(41, 41); --REACT
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(1, 1);   --PHP
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(2, 2);   --Python
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(3, 3);   --Java
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(4, 4);   --JavaScript
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(5, 5);   --C#
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(6, 6);   --C
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(7, 7);   --CPP
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(8, 8);    --CSS
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(9, 9);   --Clojure
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(10, 10), --Dart
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(11, 11); --Elixir
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(12, 12); --Erlang
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(13, 13); --Fortran
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(14, 14); --Go
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(15, 15); --GoogleSQL
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(16, 16); --Groovy
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(17, 17); --Haskell
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(18, 18); --HTML
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(19, 19); --JavaServer Pages
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(20, 20); --Kotlin
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(21, 21); --Lean (proof assistant)
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(22, 22); --Lua
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(23, 23); --Objective-C
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(24, 24); --OCaml
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(25, 25); --Perl
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(26, 26); --R
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(27, 27); --Ruby
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(28, 28); --Rust
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(29, 29); --Scala
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(30, 30); --Shell script
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(31, 31); --Solidity
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(32, 32); --SQL
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(33, 33); --Swift
+INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(34, 34); --TypeScript
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(35, 35); --XML
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(36, 36); --Verilog
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(37, 37); --YAML
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(38, 38); --Visual Basic 
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(39, 39); --Visual Basic .NET
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(40, 40); --VUE
+--INSERT INTO public.ctl_lenguajes_x_prompts(idu_lenguaje, idu_prompt) VALUES(41, 41); --REACT
 
 INSERT INTO public.cat_sentencias_ia (nom_sentencia) VALUES ('SELECT ');
 INSERT INTO public.cat_sentencias_ia (nom_sentencia) VALUES ('INSERT INTO');
@@ -609,30 +703,3 @@ INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
----***
-
----a2
-INSERT INTO public.cat_divisionales (num_divisional, nom_divisional) VALUES('90017854'::bigint, 'José Guadalupe Mendoza Macías'::varchar);
-INSERT INTO public.cat_divisionales (num_divisional, nom_divisional) VALUES('90028058'::bigint, ' Jesús Arnoldo Vargas Borboa'::varchar);
-
-INSERT INTO public.cat_nacionales(num_nacional, nom_nacional) VALUES('96652551'::integer, 'Teresa Guadalupe Gálvez Gastelum'::varchar);
-INSERT INTO public.cat_nacionales(num_nacional, nom_nacional) VALUES('90203224'::integer, 'Héctor Antonio Cruz Zazueta'::varchar);
-
-INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('0'::integer, 'cero'::varchar);
-INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('91080819'::integer, 'Gilberto Valenzuela Alvarez'::varchar);
-INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('91452716'::integer, 'Georgina Maria Del Rosario Gerardo Diaz'::varchar);
-INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('90035135'::integer, 'Oscar Alberto Aguilar Aramburo'::varchar);
-INSERT INTO public.cat_coordinadores(num_coordinador, nom_coordinador) VALUES('91187631'::integer, 'Rolando Ponce de León Araujo'::varchar);
-
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('0'::integer, 'Cero'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('90329121'::integer, 'José Arturo Solís Ramírez'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('96665701'::integer, 'Cristabel Silva Barraza'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('92474934'::integer, 'Marcos Antonio Cuevas Rodríguez'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('95657861'::integer, 'Yareli Lizeth Calderon Coronel'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('92102115'::integer, 'Claudia Batiz Beltrán'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('92853341'::integer, 'Roberto Carlos Santillán Torres'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('94812519'::integer, 'Teofilo Inzunza Payán'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('94353638'::integer, 'Ruben Octavio Manjarrez Hernández'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('91712467'::integer, 'José Rodolfo Uriarte Ramírez'::varchar);
-INSERT INTO public.cat_gerentes(num_gerente, nom_gerente) VALUES('95555897'::integer, 'Sofia Carrazco Valenzuela'::varchar);
----a2

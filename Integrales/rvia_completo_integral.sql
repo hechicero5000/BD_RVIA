@@ -1,6 +1,59 @@
 -- **** RVIA ***
 
 -- TABLAS
+---a1
+CREATE TABLE IF NOT EXISTS public.cat_puestos
+(
+	idu_puesto serial NOT NULL, 
+    num_puesto smallint NOT NULL UNIQUE,
+    nom_puesto character varying(50) NOT NULL,
+	PRIMARY KEY (idu_puesto)
+);
+
+COMMENT ON TABLE public.cat_puestos IS 'Datos de los puestos';
+COMMENT ON COLUMN public.cat_puestos.idu_puesto IS 'Consecutivo del puesto';
+COMMENT ON COLUMN public.cat_puestos.num_puesto IS 'Número del puesto';
+COMMENT ON COLUMN public.cat_puestos.nom_puesto IS 'Nombre del puesto';
+
+CREATE TABLE IF NOT EXISTS public.cat_centros
+(
+	idu_centro serial NOT NULL,
+    num_centro integer NOT NULL UNIQUE,
+    nom_centro character varying(100) NOT NULL,
+	PRIMARY KEY (idu_centro)
+);
+COMMENT ON TABLE public.cat_centros IS 'Datos de los Centros';
+COMMENT ON COLUMN public.cat_centros.idu_centro IS 'Consecutivo del centro';
+COMMENT ON COLUMN public.cat_centros.num_centro IS 'Número del Centro';
+COMMENT ON COLUMN public.cat_centros.nom_centro IS 'Nombre del Centro';
+
+CREATE TABLE IF NOT EXISTS public.cat_aplicaciones_IA
+(
+	idu_aplicacion serial NOT NULL, 
+    nom_aplicacion character varying(500) NOT NULL,
+	PRIMARY KEY (idu_aplicacion)
+);
+
+COMMENT ON TABLE public.cat_aplicaciones_IA IS 'Listado de las aplicaciones';
+COMMENT ON COLUMN public.cat_aplicaciones_IA.idu_aplicacion IS 'Consecutivo de la aplicacion';
+COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la  aplicacion';
+
+CREATE TABLE IF NOT EXISTS public.cat_encargados
+(
+	idu_encargado serial NOT NULL, 
+    num_empleado smallint NOT NULL UNIQUE,
+    nom_empleado character varying(250) NOT NULL,
+    num_puesto smallint NOT NULL,
+	PRIMARY KEY (idu_encargado)
+);
+
+COMMENT ON TABLE public.cat_encargados IS 'Datos de los en cargados';
+COMMENT ON COLUMN public.cat_encargados.idu_encargado IS 'Consecutivo de los encargados';
+COMMENT ON COLUMN public.cat_encargados.num_empleado IS 'Número del empleado';
+COMMENT ON COLUMN public.cat_encargados.nom_empleado IS 'Nombre del empleado';
+COMMENT ON COLUMN public.cat_encargados.num_puesto IS 'Numero del puesto';
+---a1
+
 CREATE TABLE IF NOT EXISTS public.cat_roles (
     idu_rol serial NOT NULL,
     nom_rol VARCHAR(255) NOT NULL,
@@ -28,11 +81,21 @@ CREATE TABLE IF NOT EXISTS public.cat_colaboradores (
     idu_rol INT NOT NULL,
     nom_correo TEXT NOT NULL UNIQUE,
     nom_contrasena TEXT NOT NULL,
+	---
+	num_centro integer NOT NULL,  
+    num_puesto smallint NOT NULL,  
+    num_encargado INT NOT NULL, 
+	---
     opc_es_activo BOOLEAN NOT NULL DEFAULT true,
     fec_creacion TIMESTAMP NOT NULL DEFAULT now(),
     fec_actualizacion TIMESTAMP NOT NULL DEFAULT now(),
     CONSTRAINT cat_colaboradores_idu_rol_fkey FOREIGN KEY (idu_rol) REFERENCES public.cat_roles(idu_rol),
-    PRIMARY KEY (idu_usuario)
+    ---
+	CONSTRAINT cat_colaboradores_num_encargado_fkey FOREIGN KEY (num_encargado) REFERENCES public.cat_encargados(num_empleado),
+	CONSTRAINT cat_colaboradores_num_puesto_fkey FOREIGN KEY (num_puesto) REFERENCES public.cat_puestos(num_puesto),
+	CONSTRAINT cat_colaboradores_num_centro_fkey FOREIGN KEY (num_centro) REFERENCES public.cat_centros(num_centro),
+    ---
+	PRIMARY KEY (idu_usuario)
 );
 
 COMMENT ON TABLE public.cat_colaboradores IS 'Tabla que almacena los usuarios';
@@ -460,76 +523,6 @@ COMMENT ON TABLE public.ctl_lenguajes_x_prompts IS 'Relación entre lenguajes de
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_lenguaje IS 'Identificador del lenguajes de programación para el que se probo';
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del prompt creado para ese lenguaje de programación';
 
----a2
-CREATE TABLE IF NOT EXISTS public.cat_divisionales
-(
-    num_divisional bigint NOT NULL,
-    nom_divisional character varying(60) COLLATE pg_catalog."default" NOT NULL,
-    fec_movto timestamp without time zone NOT NULL DEFAULT now(),
-    sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_divisionales PRIMARY KEY (sec_consecutivo, num_divisional),
-    CONSTRAINT uq_cat_divisionales_num_divisional UNIQUE (num_divisional)
-) WITHOUT OIDS;
-
-COMMENT ON TABLE  public.cat_divisionales IS 'Datos de los divisionales involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_divisionales.num_divisional IS 'Número de empleado del Divisional  (Primary key)';
-COMMENT ON COLUMN public.cat_divisionales.nom_divisional IS 'Nombre del Divisional';
-COMMENT ON COLUMN public.cat_divisionales.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_divisionales.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
-
-
-CREATE TABLE IF NOT EXISTS public.cat_nacionales
-(
-    num_nacional bigint NOT NULL,
-    nom_nacional character varying(60) NOT NULL,
-    fec_movto timestamp without time zone NOT NULL DEFAULT now(),
-    sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_nacionales PRIMARY KEY (sec_consecutivo, num_nacional),
-    CONSTRAINT uq_cat_nacionales_num_nacional UNIQUE (num_nacional)
-) WITHOUT OIDS;
-
-COMMENT ON TABLE  public.cat_nacionales IS 'Datos de los Nacionales involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_nacionales.num_nacional IS 'Número de empleado del Nacional  (Primary key)';
-COMMENT ON COLUMN public.cat_nacionales.nom_nacional IS 'Nombre del Nacional';
-COMMENT ON COLUMN public.cat_nacionales.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_nacionales.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
-
-
-CREATE TABLE IF NOT EXISTS public.cat_coordinadores
-(
-    num_coordinador bigint NOT NULL,
-    nom_coordinador character varying(60) NOT NULL,
-    fec_movto timestamp without time zone NOT NULL DEFAULT now(),
-    sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_coordinadores PRIMARY KEY (sec_consecutivo, num_coordinador),
-    CONSTRAINT uq_cat_coordinadores_num_coordinador UNIQUE (num_coordinador)
-) WITHOUT OIDS;
-
-COMMENT ON TABLE  public.cat_coordinadores IS 'Datos de los Coordinadores involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_coordinadores.num_coordinador IS 'Número de empleado del Coordinador  (Primary key)';
-COMMENT ON COLUMN public.cat_coordinadores.nom_coordinador IS 'Nombre del Coordinador';
-COMMENT ON COLUMN public.cat_coordinadores.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_coordinadores.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
-
-
-CREATE TABLE IF NOT EXISTS public.cat_gerentes
-(
-    num_gerente bigint NOT NULL,
-    nom_gerente character varying(60) COLLATE pg_catalog."default" NOT NULL,
-    fec_movto timestamp without time zone NOT NULL DEFAULT now(),
-    sec_consecutivo serial NOT NULL,
-    CONSTRAINT pk_cat_gerentes PRIMARY KEY (sec_consecutivo, num_gerente),
-    CONSTRAINT uq_cat_gerentes_num_gerente UNIQUE (num_gerente)
-) WITHOUT OIDS;
-
-COMMENT ON TABLE  public.cat_gerentes IS 'Datos de los Gerentes involucrados en los proyectos';
-COMMENT ON COLUMN public.cat_gerentes.num_gerente IS 'Número de empleado del Gerente  (Primary key)';
-COMMENT ON COLUMN public.cat_gerentes.nom_gerente IS 'Nombre del Gerente';
-COMMENT ON COLUMN public.cat_gerentes.fec_movto IS 'fecha de inserción del movimiento';
-COMMENT ON COLUMN public.cat_gerentes.sec_consecutivo IS 'Indicador automático consecutivo de la tabla (autoincremental)';
-
----a2
-
 -- GRANT PERMISOS PARA CADA TABLA
 ---***
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_sentencias_ia TO sysrvia;
@@ -556,12 +549,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sys
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
----a2
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_divisionales  TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_nacionales    TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_coordinadores TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_gerentes     TO sysrvia;
----a2
 
 -- INDICES 
 CREATE INDEX ix_cat_roles_nom_rol ON public.cat_roles(nom_rol);
@@ -643,25 +630,6 @@ CREATE INDEX ix_mae_prompts_num_efectividad ON public.mae_prompts(num_efectivida
 
 CREATE INDEX ix_ctl_lenguajes_x_prompts_idu_lenguaje ON public.ctl_lenguajes_x_prompts(idu_lenguaje);
 CREATE INDEX ix_ctl_lenguajes_x_prompts_idu_prompt ON public.ctl_lenguajes_x_prompts(idu_prompt);
-
----a2
-CREATE INDEX IF NOT EXISTS ix_cat_divisionales_keyx ON public.cat_divisionales USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_divisionales_nom_divisional ON public.cat_divisionales USING btree (nom_divisional COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_divisionales_num_divisional ON public.cat_divisionales USING btree (num_divisional ASC NULLS LAST) TABLESPACE pg_default;
-
-CREATE INDEX IF NOT EXISTS ix_cat_nacionales_keyx ON public.cat_nacionales USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_nacionales_nom_nacional ON public.cat_nacionales USING btree (nom_nacional COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_nacionales_num_nacional ON public.cat_nacionales USING btree (num_nacional ASC NULLS LAST) TABLESPACE pg_default;
-
-CREATE INDEX IF NOT EXISTS ix_cat_coordinadores_keyx ON public.cat_coordinadores USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_coordinadores_nom_coordinador ON public.cat_coordinadores USING btree (nom_coordinador COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_coordinadores_num_coordinador ON public.cat_coordinadores USING btree (num_coordinador ASC NULLS LAST) TABLESPACE pg_default;
-
-CREATE INDEX IF NOT EXISTS ix_cat_gerentes_keyx ON public.cat_gerentes USING btree (sec_consecutivo ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_gerentes_nom_gerente ON public.cat_gerentes USING btree (nom_gerente COLLATE pg_catalog."default" ASC NULLS LAST) TABLESPACE pg_default;
-CREATE INDEX IF NOT EXISTS ix_cat_gerentes_num_gerente ON public.cat_gerentes USING btree (num_gerente ASC NULLS LAST) TABLESPACE pg_default;
----a2
-
 
 -- TYPE
 CREATE TYPE public.typ_costo AS (
