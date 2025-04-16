@@ -41,7 +41,7 @@ COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la  ap
 CREATE TABLE IF NOT EXISTS public.cat_encargados
 (
 	idu_encargado serial NOT NULL, 
-    num_empleado INT NOT NULL UNIQUE, 
+    num_empleado INT NOT NULL, 
     nom_empleado character varying(250) NOT NULL,
     num_puesto smallint NOT NULL,
 	PRIMARY KEY (idu_encargado)
@@ -93,7 +93,6 @@ CREATE TABLE IF NOT EXISTS public.cat_colaboradores (
     CONSTRAINT cat_colaboradores_idu_rol_fkey FOREIGN KEY (idu_rol) REFERENCES public.cat_roles(idu_rol),
     ---
     CONSTRAINT cat_colaboradores_idu_aplicacion_fkey FOREIGN KEY (idu_aplicacion) REFERENCES public.cat_aplicaciones_IA(idu_aplicacion),
-	CONSTRAINT cat_colaboradores_num_encargado_fkey FOREIGN KEY (num_encargado) REFERENCES public.cat_encargados(num_empleado),
 	CONSTRAINT cat_colaboradores_num_puesto_fkey FOREIGN KEY (num_puesto) REFERENCES public.cat_puestos(num_puesto),
 	CONSTRAINT cat_colaboradores_num_centro_fkey FOREIGN KEY (num_centro) REFERENCES public.cat_centros(num_centro),
     ---
