@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS public.cat_colaboradores (
 	---
 	num_centro integer NOT NULL,  
     num_puesto smallint NOT NULL,  
-    num_encargado INT NOT NULL, 
+    num_encargado INT NULL, 
 	---
     opc_es_activo BOOLEAN NOT NULL DEFAULT true,
     fec_creacion TIMESTAMP NOT NULL DEFAULT now(),
