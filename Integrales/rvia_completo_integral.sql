@@ -41,7 +41,7 @@ COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la  ap
 CREATE TABLE IF NOT EXISTS public.cat_encargados
 (
 	idu_encargado serial NOT NULL, 
-    num_empleado INT NULL, 
+    num_empleado INT, 
     nom_empleado character varying(250) NOT NULL,
     num_puesto smallint NOT NULL,
 	PRIMARY KEY (idu_encargado)
