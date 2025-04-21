@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.cat_puestos
 	PRIMARY KEY (idu_puesto)
 );
 
-COMMENT ON TABLE public.cat_puestos IS 'Datos de los puestos';
+COMMENT ON TABLE public.cat_puestos IS 'Tabla que define los diferentes puestos de trabajo dentro de la organización';
 COMMENT ON COLUMN public.cat_puestos.idu_puesto IS 'Consecutivo del puesto';
 COMMENT ON COLUMN public.cat_puestos.num_puesto IS 'Número del puesto';
 COMMENT ON COLUMN public.cat_puestos.nom_puesto IS 'Nombre del puesto';
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS public.cat_centros
     nom_centro character varying(100) NOT NULL,
 	PRIMARY KEY (idu_centro)
 );
-COMMENT ON TABLE public.cat_centros IS 'Datos de los Centros';
+COMMENT ON TABLE public.cat_centros IS 'Tabla que contiene la información de los diferentes centros de trabajo';
 COMMENT ON COLUMN public.cat_centros.idu_centro IS 'Consecutivo del centro';
 COMMENT ON COLUMN public.cat_centros.num_centro IS 'Número del Centro';
 COMMENT ON COLUMN public.cat_centros.nom_centro IS 'Nombre del Centro';
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS public.cat_aplicaciones_IA
 	PRIMARY KEY (idu_aplicacion)
 );
 
-COMMENT ON TABLE public.cat_aplicaciones_IA IS 'Listado de las aplicaciones';
+COMMENT ON TABLE public.cat_aplicaciones_IA IS 'Tabla que contiene la información de las aplicaciones a escanear';
 COMMENT ON COLUMN public.cat_aplicaciones_IA.idu_aplicacion IS 'Consecutivo de la aplicacion';
 COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la  aplicacion';
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS public.cat_encargados
 	PRIMARY KEY (idu_encargado)
 );
 
-COMMENT ON TABLE public.cat_encargados IS 'Datos de los en cargados';
+COMMENT ON TABLE public.cat_encargados IS 'Tabla que almacena la información de los encargados de los diferentes puestos de trabajo';
 COMMENT ON COLUMN public.cat_encargados.idu_encargado IS 'Consecutivo de los encargados';
 COMMENT ON COLUMN public.cat_encargados.num_empleado IS 'Número del empleado';
 COMMENT ON COLUMN public.cat_encargados.nom_empleado IS 'Nombre del empleado';
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS public.cat_roles (
     PRIMARY KEY (idu_rol)
 );
 
-COMMENT ON TABLE public.cat_roles IS 'Tabla que almacena los diferentes roles de trabajo';
+COMMENT ON TABLE public.cat_roles IS 'Tabla que define los roles de acceso con diferentes niveles de privilegio';
 COMMENT ON COLUMN public.cat_roles.idu_rol IS 'Identificador del rol de trabajo';
 COMMENT ON COLUMN public.cat_roles.nom_rol IS 'Nombre del rol de trabajo';
 COMMENT ON COLUMN public.cat_roles.num_nivel IS 'Nivel del rol de trabajo 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS public.cat_colaboradores (
 	PRIMARY KEY (idu_usuario)
 );
 
-COMMENT ON TABLE public.cat_colaboradores IS 'Tabla que almacena los usuarios';
+COMMENT ON TABLE public.cat_colaboradores IS 'Tabla que almacena información de los colaboradores o usuarios del sistema, incluyendo sus aplicaciones, roles, centros y puestos asociados';
 COMMENT ON COLUMN public.cat_colaboradores.idu_usuario IS 'Identificador del usuario';
 COMMENT ON COLUMN public.cat_colaboradores.num_empleado IS 'Número de empleado';
 COMMENT ON COLUMN public.cat_colaboradores.nom_usuario IS 'Nombre del usuario';
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS public.ctl_estatus_aplicaciones (
     PRIMARY KEY (idu_estatus_aplicacion)
 );
 
-COMMENT ON TABLE public.ctl_estatus_aplicaciones IS 'Tabla que almacena los diferentes estatus de las aplicaciones';
+COMMENT ON TABLE public.ctl_estatus_aplicaciones IS 'Tabla que define los posibles estados de las aplicaciones';
 COMMENT ON COLUMN public.ctl_estatus_aplicaciones.idu_estatus_aplicacion IS 'Identificador del estatus';
 COMMENT ON COLUMN public.ctl_estatus_aplicaciones.des_estatus_aplicacion IS 'Descripción del estatus de la aplicación 
     1- En proceso 
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS public.ctl_codigo_fuentes (
     PRIMARY KEY (idu_codigo_fuente)
 );
 
-COMMENT ON TABLE public.ctl_codigo_fuentes IS 'Tabla que almacena los códigos fuentes';
+COMMENT ON TABLE public.ctl_codigo_fuentes IS 'Tabla que almacena información sobre los códigos fuente';
 COMMENT ON COLUMN public.ctl_codigo_fuentes.idu_codigo_fuente IS 'Identificador del código fuente';
 COMMENT ON COLUMN public.ctl_codigo_fuentes.nom_codigo_fuente IS 'Nombre del código fuente';
 COMMENT ON COLUMN public.ctl_codigo_fuentes.nom_directorio IS 'Directorio donde se almacena el código fuente';
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     PRIMARY KEY (idu_aplicacion)
 );
 
-COMMENT ON TABLE public.mae_aplicaciones IS 'Tabla que almacena las aplicaciones';
+COMMENT ON TABLE public.mae_aplicaciones IS 'Tabla que almacena información detallada de las aplicaciones';
 COMMENT ON COLUMN public.mae_aplicaciones.idu_aplicacion IS 'Identificador de la aplicación';
 COMMENT ON COLUMN public.mae_aplicaciones.idu_proyecto IS 'Identificador único generado de la aplicación';
 COMMENT ON COLUMN public.mae_aplicaciones.nom_aplicacion IS 'Nombre de la aplicación';
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS public.mov_escaneos (
     PRIMARY KEY (idu_escaneo)
 );
 
-COMMENT ON TABLE public.mov_escaneos IS 'Tabla que almacena los escaneos realizados';
+COMMENT ON TABLE public.mov_escaneos IS 'Tabla que registra los escaneos realizados a las aplicaciones';
 COMMENT ON COLUMN public.mov_escaneos.idu_escaneo IS 'Identificador del escaneo';
 COMMENT ON COLUMN public.mov_escaneos.nom_escaneo IS 'Nombre del escaneo';
 COMMENT ON COLUMN public.mov_escaneos.nom_directorio IS 'Directorio donde se almacena el escaneo';
@@ -219,7 +219,11 @@ CREATE TABLE IF NOT EXISTS public.ctl_usuarios_por_aplicaciones (
     CONSTRAINT ctl_usuarios_por_aplicaciones_idu_aplicacion_fkey FOREIGN KEY (idu_aplicacion) REFERENCES public.mae_aplicaciones(idu_aplicacion),
     PRIMARY KEY (idu)
 );
---sin datos para comentar
+
+COMMENT ON TABLE public.ctl_usuarios_por_aplicaciones IS 'Tabla que establece la relación entre usuarios y las aplicaciones a las que tienen acceso';
+COMMENT ON COLUMN public.ctl_usuarios_por_aplicaciones.idu IS 'Identificador de la tabla ctl_usuarios_por_aplicaciones';
+COMMENT ON COLUMN public.ctl_usuarios_por_aplicaciones.idu_usuario IS 'Hace referencia a la tabla cat_colaboradores';
+COMMENT ON COLUMN public.ctl_usuarios_por_aplicaciones.idu_aplicacion IS 'Hece referencia a la tabla mae_aplicaciones';
 
 CREATE TABLE IF NOT EXISTS public.ctl_aplicaciones_por_escaneos (
     idu serial NOT NULL,
@@ -229,7 +233,11 @@ CREATE TABLE IF NOT EXISTS public.ctl_aplicaciones_por_escaneos (
     CONSTRAINT ctl_aplicaciones_por_escaneos_idu_escaneo_fkey FOREIGN KEY (idu_escaneo) REFERENCES public.mov_escaneos(idu_escaneo),
     PRIMARY KEY (idu)
 );
---sin datos para comentar
+
+COMMENT ON TABLE public.ctl_aplicaciones_por_escaneos IS 'Tabla que gestiona la relación entre las aplicaciones y los escaneos';
+COMMENT ON COLUMN public.ctl_aplicaciones_por_escaneos.idu IS 'Identificador de la tabla ctl_aplicaciones_por_escaneos';
+COMMENT ON COLUMN public.ctl_aplicaciones_por_escaneos.idu_aplicacion IS 'Hace referencia a la tabla mae_aplicaciones';
+COMMENT ON COLUMN public.ctl_aplicaciones_por_escaneos.idu_escaneo IS 'Hece referencia a la tabla mov_escaneos';
 
 CREATE TABLE IF NOT EXISTS public.his_seguimiento_modificaciones (
     idu_seguimiento serial NOT NULL,
@@ -242,7 +250,16 @@ CREATE TABLE IF NOT EXISTS public.his_seguimiento_modificaciones (
     valores_nuevos JSONB,
 	PRIMARY KEY (idu_seguimiento)
 );
---sin datos para comentar
+
+COMMENT ON TABLE public.his_seguimiento_modificaciones IS 'Tabla que registra el historial de modificaciones en otras tablas';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.idu_seguimiento IS 'Identificador de la tabla his_seguimiento_modificaciones';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.nom_tabla IS 'Nombre de la tabla';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.nom_accion IS 'Nombre de la accion';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.idu_usuario IS 'Identificador de idu_usuario';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.fec_evento IS 'Fecha del evento';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.identificador_registro IS 'Identificador del  registro';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.valores_anteriores IS 'Valores anteriores';
+COMMENT ON COLUMN public.his_seguimiento_modificaciones.valores_nuevos IS 'Valores nuevos';
 
 CREATE TABLE IF NOT EXISTS public.cat_lenguajes (
     idu_lenguaje serial NOT NULL,
@@ -251,7 +268,7 @@ CREATE TABLE IF NOT EXISTS public.cat_lenguajes (
     PRIMARY KEY (idu_lenguaje)
 );
 
-COMMENT ON TABLE public.cat_lenguajes IS 'Tabla que almacena los lenguajes de programación soportados';
+COMMENT ON TABLE public.cat_lenguajes IS 'Tabla que define los lenguajes de programación';
 COMMENT ON COLUMN public.cat_lenguajes.idu_lenguaje IS 'Identificador del lenguaje de programación';
 COMMENT ON COLUMN public.cat_lenguajes.nom_lenguaje IS 'Nombre del lenguaje de programación';
 COMMENT ON COLUMN public.cat_lenguajes.fec_creacion IS 'fecha de registro del lenguaje de programación';
@@ -266,7 +283,7 @@ CREATE TABLE IF NOT EXISTS public.ctl_checkmarx (
     PRIMARY KEY (idu_checkmarx)
 );
 
-COMMENT ON TABLE public.ctl_checkmarx IS 'Tabla que almacena los Csv';
+COMMENT ON TABLE public.ctl_checkmarx IS 'Tabla que almacena datos obtenidos de Checkmarx para el análisis de código';
 COMMENT ON COLUMN public.ctl_checkmarx.idu_checkmarx IS 'Identificador del csv';
 COMMENT ON COLUMN public.ctl_checkmarx.nom_checkmarx IS 'Nombre del csv';
 COMMENT ON COLUMN public.ctl_checkmarx.nom_directorio IS 'Directorio donde se almacena el csv';
@@ -285,7 +302,7 @@ CREATE TABLE IF NOT EXISTS public.mov_costos_proyectos (
     CONSTRAINT pk_mov_costos_proyectos PRIMARY KEY (keyx)
 ) WITHOUT OIDS;
 
-COMMENT ON TABLE public.mov_costos_proyectos IS 'Datos de empleados y sentencias encontradas en el parseo de un proyecto';
+COMMENT ON TABLE public.mov_costos_proyectos IS 'Tabla que registra los costos asociados a los proyectos';
 COMMENT ON COLUMN public.mov_costos_proyectos.num_empleado IS 'Número de empleado de la persona que ejecutó la aplicación';
 COMMENT ON COLUMN public.mov_costos_proyectos.id_proyecto IS 'ID del Proyecto';
 COMMENT ON COLUMN public.mov_costos_proyectos.nom_proyecto IS 'Nombre del Proyecto';
