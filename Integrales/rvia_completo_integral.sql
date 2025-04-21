@@ -76,7 +76,9 @@ COMMENT ON COLUMN public.cat_roles.fec_actualizacion IS 'Fecha de actualización
 
 CREATE TABLE IF NOT EXISTS public.cat_colaboradores (
     idu_usuario serial NOT NULL,
+    ---
     idu_aplicacion serial NOT NULL,
+    ---
     num_empleado INT NOT NULL UNIQUE,
     nom_usuario TEXT NOT NULL,
     idu_rol INT NOT NULL,
@@ -525,6 +527,12 @@ COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_lenguaje IS 'Identificador 
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del prompt creado para ese lenguaje de programación';
 
 -- GRANT PERMISOS PARA CADA TABLA
+---a1
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_puestos TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_centros TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_aplicaciones_IA TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_encargados TO sysrvia;
+---a1
 ---***
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_sentencias_ia TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_bito_ia TO sysrvia;
@@ -552,6 +560,19 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
 
 -- INDICES 
+---a1
+CREATE INDEX ix_cat_puestos_num_puesto ON public.cat_puestos(num_puesto);
+CREATE INDEX ix_cat_puestos_nom_puesto ON public.cat_puestos(nom_puesto);
+
+CREATE INDEX ix_cat_centros_num_centro ON public.cat_centros(num_centro);
+CREATE INDEX ix_cat_centros_nom_centro ON public.cat_centros(nom_centro);
+
+CREATE INDEX ix_cat_aplicaciones_IA_nom_aplicacion ON public.cat_aplicaciones_IA(nom_aplicacion);
+
+CREATE INDEX ix_cat_encargados_num_empleado ON public.cat_encargados(num_empleado);
+CREATE INDEX ix_cat_encargados_nom_empleado ON public.cat_encargados(nom_empleado);
+---a1
+
 CREATE INDEX ix_cat_roles_nom_rol ON public.cat_roles(nom_rol);
 CREATE INDEX ix_cat_roles_num_nivel ON public.cat_roles(num_nivel);
 
