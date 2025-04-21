@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS public.cat_puestos
 );
 
 COMMENT ON TABLE public.cat_puestos IS 'Tabla que define los diferentes puestos de trabajo dentro de la organización';
-COMMENT ON COLUMN public.cat_puestos.idu_puesto IS 'Consecutivo del puesto';
-COMMENT ON COLUMN public.cat_puestos.num_puesto IS 'Número del puesto';
-COMMENT ON COLUMN public.cat_puestos.nom_puesto IS 'Nombre del puesto';
+COMMENT ON COLUMN public.cat_puestos.idu_puesto IS 'Consecutivo del puesto, se utiliza como clave primaria y se incrementa automáticamente';
+COMMENT ON COLUMN public.cat_puestos.num_puesto IS 'Número único asignado al puesto que permite identificarlo. Este campo tiene la restricción de ser único';
+COMMENT ON COLUMN public.cat_puestos.nom_puesto IS 'Nombre del puesto, que describe la función o cargo correspondiente dentro de la organización';
 
 CREATE TABLE IF NOT EXISTS public.cat_centros
 (
@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS public.cat_centros
 	PRIMARY KEY (idu_centro)
 );
 COMMENT ON TABLE public.cat_centros IS 'Tabla que contiene la información de los diferentes centros de trabajo';
-COMMENT ON COLUMN public.cat_centros.idu_centro IS 'Consecutivo del centro';
-COMMENT ON COLUMN public.cat_centros.num_centro IS 'Número del Centro';
-COMMENT ON COLUMN public.cat_centros.nom_centro IS 'Nombre del Centro';
+COMMENT ON COLUMN public.cat_centros.idu_centro IS 'Consecutivo del centro, utilizado como clave primaria y se incrementa automáticamente';
+COMMENT ON COLUMN public.cat_centros.num_centro IS 'Número único que identifica al centro, el cual debe ser único en la tabla';
+COMMENT ON COLUMN public.cat_centros.nom_centro IS 'Nombre del centro, que puede incluir información adicional sobre la ubicación o función del mismo';
 
 CREATE TABLE IF NOT EXISTS public.cat_aplicaciones_IA
 (
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS public.cat_aplicaciones_IA
 );
 
 COMMENT ON TABLE public.cat_aplicaciones_IA IS 'Tabla que contiene la información de las aplicaciones a escanear';
-COMMENT ON COLUMN public.cat_aplicaciones_IA.idu_aplicacion IS 'Consecutivo de la aplicacion';
-COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la  aplicacion';
+COMMENT ON COLUMN public.cat_aplicaciones_IA.idu_aplicacion IS 'Consecutivo de los cat_aplicaciones_IA, utilizado como clave primaria y se incrementa automáticamente';
+COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la aplicacion';
 
 CREATE TABLE IF NOT EXISTS public.cat_encargados
 (
@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS public.cat_encargados
 );
 
 COMMENT ON TABLE public.cat_encargados IS 'Tabla que almacena la información de los encargados de los diferentes puestos de trabajo';
-COMMENT ON COLUMN public.cat_encargados.idu_encargado IS 'Consecutivo de los encargados';
-COMMENT ON COLUMN public.cat_encargados.num_empleado IS 'Número del empleado';
-COMMENT ON COLUMN public.cat_encargados.nom_empleado IS 'Nombre del empleado';
-COMMENT ON COLUMN public.cat_encargados.num_puesto IS 'Numero del puesto';
+COMMENT ON COLUMN public.cat_encargados.idu_encargado IS 'Consecutivo de los encargados, utilizado como clave primaria y se incrementa automáticamente';
+COMMENT ON COLUMN public.cat_encargados.num_empleado IS 'Número único que identifica a cada empleado dentro de la organización';
+COMMENT ON COLUMN public.cat_encargados.nom_empleado IS 'Nombre del empleado que ocupa el puesto, en un formato suficientemente amplio para incluir nombres compuestos';
+COMMENT ON COLUMN public.cat_encargados.num_puesto IS 'Número del puesto correspondiente al empleado, permitiendo vincular al encargado con su puesto específico en la organización';
 ---a1
 
 CREATE TABLE IF NOT EXISTS public.cat_roles (
