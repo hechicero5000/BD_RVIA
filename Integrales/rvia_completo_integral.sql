@@ -146,6 +146,28 @@ COMMENT ON COLUMN public.ctl_codigo_fuentes.nom_directorio IS 'Directorio donde 
 COMMENT ON COLUMN public.ctl_codigo_fuentes.fec_creacion IS 'Fecha de registro del código fuente';
 COMMENT ON COLUMN public.ctl_codigo_fuentes.fec_creacion IS 'Fecha de actualización de registro del código fuente';
 
+--a2
+CREATE TABLE IF NOT EXISTS public.mov_comparaciones_archivos_ia (
+    idu_aplicacion SERIAL NOT NULL,
+    idu_proyecto BIGINT NOT NULL UNIQUE,
+    nom_proyecto character varying(100) NOT NULL,
+    fec_registro TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    arc_origen TEXT NOT NULL,
+    arc_modificado TEXT NOT NULL,
+    nom_funcion_obsoleta character varying(100) NOT NULL,
+    num_linea INT NOT NULL,
+    PRIMARY KEY (idu_aplicacion)
+);
+
+COMMENT ON TABLE public.mov_comparaciones_archivos_ia IS 'Tabla que almacena los registros de archivos antes y después de ser procesados o modificados por la IA, detallando las diferencias entre el archivo original y el archivo modificado.';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.idu_aplicacion IS 'Identificador secuencial';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.idu_proyecto IS 'Hace referencia al proyecto de la tabla mae_aplicaciones';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.nom_proyecto IS 'Nombre del proyecto';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.fec_registro IS 'Fecha en que se registro el proyecto';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_origen IS 'Archivo origen';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_modificado IS 'Archivo modificado';
+--a2
+
 CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     idu_aplicacion serial NOT NULL,
     idu_proyecto bigint NOT NULL,
@@ -166,6 +188,10 @@ CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     CONSTRAINT mae_aplicaciones_idu_usuario_fkey FOREIGN KEY (idu_usuario) REFERENCES public.cat_colaboradores(idu_usuario),
     CONSTRAINT mae_aplicaciones_idu_codigo_fuente_fkey FOREIGN KEY (idu_codigo_fuente) REFERENCES public.ctl_codigo_fuentes(idu_codigo_fuente),
     CONSTRAINT mae_aplicaciones_clv_estatus_fkey FOREIGN KEY (clv_estatus) REFERENCES public.ctl_estatus_aplicaciones(idu_estatus_aplicacion),
+
+    --a2
+    CONSTRAINT mae_aplicaciones_idu_proyecto_fkey FOREIGN KEY (idu_proyecto) REFERENCES public.mov_comparaciones_archivos_ia(idu_proyecto),
+    --a2
     PRIMARY KEY (idu_aplicacion)
 );
 
@@ -575,6 +601,10 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sys
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
+
+--a2
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_comparaciones_archivos_ia TO sysrvia;
+--a2
 
 -- INDICES 
 ---a1
