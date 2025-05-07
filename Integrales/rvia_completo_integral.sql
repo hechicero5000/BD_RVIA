@@ -1057,6 +1057,99 @@ BEGIN
 END
 $BODY$;
 
+---a3 07/05/25
+CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_lenguaje_proyecto(
+    iEstatus smallint,
+    idProyecto bigint,
+    nomAplicacion character varying)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.mae_aplicaciones 
+    SET opc_lenguaje = iEstatus 
+    WHERE idu_proyecto = idProyecto; 
+    -- AND nom_aplicacion LIKE '%' || nomAplicacion || '%';    
+    RETURN 1;
+END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_doc_proyecto(
+    iEstatus smallint,
+    idProyecto bigint,
+    nomAplicacion character varying)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.mae_aplicaciones 
+    SET opc_estatus_doc = iEstatus 
+    WHERE idu_proyecto = idProyecto; 
+    -- AND nom_aplicacion LIKE '%' || nomAplicacion || '%';    
+    RETURN 1;
+END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_doc_code_proyecto(
+    iEstatus smallint,
+    idProyecto bigint,
+    nomAplicacion character varying)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.mae_aplicaciones 
+    SET opc_estatus_doc_code = iEstatus 
+    WHERE idu_proyecto = idProyecto; 
+    -- AND nom_aplicacion LIKE '%' || nomAplicacion || '%';    
+    RETURN 1;
+END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_caso_proyecto(
+    iEstatus smallint,
+    idProyecto bigint,
+    nomAplicacion character varying)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.mae_aplicaciones 
+    SET opc_estatus_caso = iEstatus 
+    WHERE idu_proyecto = idProyecto; 
+    -- AND nom_aplicacion LIKE '%' || nomAplicacion || '%';    
+    RETURN 1;
+END;
+$BODY$;
+
+
+CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_calificar_proyecto(
+    iEstatus smallint,
+    idProyecto bigint,
+    nomAplicacion character varying)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.mae_aplicaciones 
+    SET opc_estatus_calificar = iEstatus 
+    WHERE idu_proyecto = idProyecto; 
+    -- AND nom_aplicacion LIKE '%' || nomAplicacion || '%';    
+    RETURN 1;
+END;
+$BODY$;
+---a3 07/05/25
+
 CREATE OR REPLACE FUNCTION public.fun_registrar_totales_checkmarx(
     bigint,
     bigint,
