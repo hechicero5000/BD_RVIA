@@ -703,3 +703,33 @@ INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('', '');
+
+---Usuario por default
+
+INSERT INTO public.cat_colaboradores(
+	idu_aplicacion, 
+	num_empleado, 
+	nom_usuario, 
+	idu_rol, 
+	nom_correo, 
+	nom_contrasena, 
+	num_centro, 
+	num_puesto, 
+	num_encargado, 
+	opc_es_activo, 
+	fec_creacion, 
+	fec_actualizacion
+)VALUES (
+	1,
+	99999999,
+	'7609e8982a586a7608295bb525920ad4:3e334ffb16321f587a5a9b97ca5f63cccda1733ffe4f67ff1fd75ac041c556a7627fa235bfa63064cb2cacffb1444dfe',
+	1,
+	'ba605a449cf705c5fad9d9a0e2f3c68b:e85c17ce33b51fc19debbbf137f100fab6107964ac460d9e4bb752504eb39579',
+	'$2b$10$sBzgA8ji2MSCbpcICuUxKucB9HX2jzJmHG2S7NOe.5rM04KmgAssO',
+	230190,
+	1,
+	null,
+	true,
+	'2025-04-25 09:59:01.81152',
+	'2025-04-25 09:59:01.81152'
+);
