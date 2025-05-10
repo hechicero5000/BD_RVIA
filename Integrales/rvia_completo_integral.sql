@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     CONSTRAINT mae_aplicaciones_clv_estatus_fkey FOREIGN KEY (clv_estatus) REFERENCES public.ctl_estatus_aplicaciones(idu_estatus_aplicacion),
 
     --a2
-    CONSTRAINT mae_aplicaciones_idu_proyecto_fkey FOREIGN KEY (idu_proyecto) REFERENCES public.mov_comparaciones_archivos_ia(idu_proyecto),
+    --CONSTRAINT mae_aplicaciones_idu_proyecto_fkey FOREIGN KEY (idu_proyecto) REFERENCES public.mov_comparaciones_archivos_ia(idu_proyecto),
     --a2
     PRIMARY KEY (idu_aplicacion)
 );
