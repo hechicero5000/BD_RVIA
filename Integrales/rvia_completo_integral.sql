@@ -225,7 +225,10 @@ CREATE TABLE IF NOT EXISTS public.mov_comparaciones_archivos_ia (
     arc_modificado TEXT NOT NULL,
     nom_funcion_obsoleta character varying(100) NOT NULL,
     num_linea INT NOT NULL,
-    PRIMARY KEY (idu_aplicacion)
+    PRIMARY KEY (idu_aplicacion),
+	CONSTRAINT fk_mae_aplicaciones
+      FOREIGN KEY (idu_aplicacion)
+      REFERENCES public.mae_aplicaciones(idu_aplicacion)
 );
 
 COMMENT ON TABLE public.mov_comparaciones_archivos_ia IS 'Tabla que almacena los registros de archivos antes y después de ser procesados o modificados por la IA, detallando las diferencias entre el archivo original y el archivo modificado.';
