@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     opc_estatus_caso INT NOT NULL DEFAULT 0,
     opc_estatus_calificar INT NOT NULL DEFAULT 0,
     idu_codigo_fuente INT,
-
+    idu_aplicacion_de_negocio bigint NOT NULL,
     fec_creacion TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     fec_actualizacion TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT mae_aplicaciones_idu_usuario_fkey FOREIGN KEY (idu_usuario) REFERENCES public.cat_colaboradores(idu_usuario),
