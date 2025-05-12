@@ -146,28 +146,6 @@ COMMENT ON COLUMN public.ctl_codigo_fuentes.nom_directorio IS 'Directorio donde 
 COMMENT ON COLUMN public.ctl_codigo_fuentes.fec_creacion IS 'Fecha de registro del código fuente';
 COMMENT ON COLUMN public.ctl_codigo_fuentes.fec_creacion IS 'Fecha de actualización de registro del código fuente';
 
---a2
-CREATE TABLE IF NOT EXISTS public.mov_comparaciones_archivos_ia (
-    idu_aplicacion SERIAL NOT NULL,
-    idu_proyecto BIGINT NOT NULL UNIQUE,
-    nom_proyecto character varying(100) NOT NULL,
-    fec_registro TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    arc_origen TEXT NOT NULL,
-    arc_modificado TEXT NOT NULL,
-    nom_funcion_obsoleta character varying(100) NOT NULL,
-    num_linea INT NOT NULL,
-    PRIMARY KEY (idu_aplicacion)
-);
-
-COMMENT ON TABLE public.mov_comparaciones_archivos_ia IS 'Tabla que almacena los registros de archivos antes y después de ser procesados o modificados por la IA, detallando las diferencias entre el archivo original y el archivo modificado.';
-COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.idu_aplicacion IS 'Identificador secuencial';
-COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.idu_proyecto IS 'Hace referencia al proyecto de la tabla mae_aplicaciones';
-COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.nom_proyecto IS 'Nombre del proyecto';
-COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.fec_registro IS 'Fecha en que se registro el proyecto';
-COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_origen IS 'Archivo origen';
-COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_modificado IS 'Archivo modificado';
---a2
-
 CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     idu_aplicacion serial NOT NULL,
     idu_proyecto bigint NOT NULL,
@@ -236,6 +214,31 @@ COMMENT ON COLUMN public.mov_escaneos.nom_escaneo IS 'Nombre del escaneo';
 COMMENT ON COLUMN public.mov_escaneos.nom_directorio IS 'Directorio donde se almacena el escaneo';
 COMMENT ON COLUMN public.mov_escaneos.idu_aplicacion IS 'Identificador de la aplicación del escaneo';
 COMMENT ON COLUMN public.mov_escaneos.fec_creacion IS 'Fecha de registro del escaneo';
+
+--a2
+CREATE TABLE IF NOT EXISTS public.mov_comparaciones_archivos_ia (
+    idu_aplicacion SERIAL NOT NULL,
+    idu_proyecto BIGINT NOT NULL UNIQUE,
+    nom_proyecto character varying(100) NOT NULL,
+    fec_registro TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    arc_origen TEXT NOT NULL,
+    arc_modificado TEXT NOT NULL,
+    nom_funcion_obsoleta character varying(100) NOT NULL,
+    num_linea INT NOT NULL,
+    PRIMARY KEY (idu_aplicacion),
+	CONSTRAINT fk_mae_aplicaciones
+      FOREIGN KEY (idu_aplicacion)
+      REFERENCES public.mae_aplicaciones(idu_aplicacion)
+);
+
+COMMENT ON TABLE public.mov_comparaciones_archivos_ia IS 'Tabla que almacena los registros de archivos antes y después de ser procesados o modificados por la IA, detallando las diferencias entre el archivo original y el archivo modificado.';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.idu_aplicacion IS 'Identificador secuencial';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.idu_proyecto IS 'Hace referencia al proyecto de la tabla mae_aplicaciones';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.nom_proyecto IS 'Nombre del proyecto';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.fec_registro IS 'Fecha en que se registro el proyecto';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_origen IS 'Archivo origen';
+COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_modificado IS 'Archivo modificado';
+--a2
 
 CREATE TABLE IF NOT EXISTS public.ctl_usuarios_por_aplicaciones (
     idu serial NOT NULL,
