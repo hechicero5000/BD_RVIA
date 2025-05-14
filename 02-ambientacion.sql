@@ -1599,28 +1599,59 @@ INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('CS', 'Sy
 INSERT INTO public.cat_obsoletos_ia(nom_lenguaje, fun_obsoleto) VALUES('CS', 'System.Security.Cryptography.Algorithms');
 
 ---Usuario por default
-INSERT INTO public.cat_colaboradores(
-	num_empleado, 
-	nom_usuario, 
-	idu_rol, 
-	nom_correo, 
-	nom_contrasena, 
-	num_centro, 
-	num_puesto, 
-	num_encargado, 
-	opc_es_activo, 
-	fec_creacion, 
-	fec_actualizacion
-)VALUES (
-	99999999,
-	'7609e8982a586a7608295bb525920ad4:3e334ffb16321f587a5a9b97ca5f63cccda1733ffe4f67ff1fd75ac041c556a7627fa235bfa63064cb2cacffb1444dfe',
-	1,
-	'ba605a449cf705c5fad9d9a0e2f3c68b:e85c17ce33b51fc19debbbf137f100fab6107964ac460d9e4bb752504eb39579',
-	'$2b$10$sBzgA8ji2MSCbpcICuUxKucB9HX2jzJmHG2S7NOe.5rM04KmgAssO',
-	230190,
-	1,
-	null,
-	true,
-	'2025-04-25 09:59:01.81152',
-	'2025-04-25 09:59:01.81152'
+INSERT INTO public.cat_colaboradores (
+    num_empleado, nom_usuario, idu_rol, nom_correo, nom_contrasena,
+    num_centro, num_puesto, num_encargado, opc_es_activo, fec_creacion, fec_actualizacion
+) VALUES
+(
+    99999999,
+    '7609e8982a586a7608295bb525920ad4:3e334ffb16321f587a5a9b97ca5f63cccda1733ffe4f67ff1fd75ac041c556a7627fa235bfa63064cb2cacffb1444dfe',
+    1,
+    'ba605a449cf705c5fad9d9a0e2f3c68b:e85c17ce33b51fc19debbbf137f100fab6107964ac460d9e4bb752504eb39579',
+    '$2b$10$sBzgA8ji2MSCbpcICuUxKucB9HX2jzJmHG2S7NOe.5rM04KmgAssO',
+    230190,
+    1,
+    NULL,
+    true,
+    '2025-04-25 09:59:01.81152',
+    '2025-04-25 09:59:01.81152'
+),
+(
+    90203224,
+    'f436d66fa090d9724f818fd19dcf21d0:fb79b14b98bf46fa195469c916f90376a9b3f81e207df1a1f829d6a0d0b274f5',
+    1,
+    '290f3dfa904603dd68b36579679d1aa5:cbb5cedca9a5d2000b011b96be81b80172674ece08950a30a5ca8ab39f769acc',
+    '$2b$10$gn1NTVY3Qbf7otNyeRtH4uBl81OPMah0MNjTcMUQ1Rm5WND.6mVfK',
+    230190,
+    2,
+    90000001,
+    true,
+    '2025-05-13 19:04:11.474237',
+    '2025-05-13 19:04:11.474237'
+),
+(
+    90329121,
+    '865796c55f8164762a7378de87768e1f:d79ec110846ea1f7f26872c86192902cafe601dc07068aa9f441b579c5bfbe7a',
+    1,
+    'bf138ae4d50b90ca76974716009e9869:54fa5be3e1c9b6d6f0bec05ca4293bb0a0ba2922f5c412fd07b7a02497a83990',
+    '$2b$10$0n/ptTOdhkbgZfztmuUdG.HPv8RDBOUnx3bwZAaLFQEq/Q2SPHKXi',
+    231649,
+    4,
+    90000003,
+    true,
+    '2025-05-13 00:23:24.574292',
+    '2025-05-13 00:23:24.574292'
+),
+(
+    92317261,
+    '9717997e8644fce48714f618f0a5a33d:d5adc8462508f6acd8f779879a8813ac31ba318b81586672865f42f2696f1912',
+    3,
+    '9c51683de3cc452cc8c345d7bee7a723:e4e947c0dd8dd8dd2dd9b9c0cff6f47eb498d42a1bfd14ede2fb28e40a3ded53',
+    '$2b$10$u4NO03gv89yB7jUWdvz9beR1EsnadO8dvfS.K0EvhcT/D3jl0tacW',
+    230578,
+    5,
+    90000004,
+    true,
+    '2025-05-13 19:13:20.060597',
+    '2025-05-13 19:13:20.060597'
 );
