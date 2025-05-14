@@ -1,6 +1,9 @@
 -- **** RVIA ***
 -- TABLAS
 
+
+
+
 CREATE TABLE IF NOT EXISTS public.cat_puestos
 (
 	idu_puesto serial NOT NULL, 
@@ -580,35 +583,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_comparaciones_archivos_ia TO sysrvia;
 
---sysrvia_dev
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_puestos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_centros TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_aplicaciones_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_encargados TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_sentencias_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_bito_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_proyectos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales_checkmarx TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_obsoletos_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_obsoletos_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_sentencias_ia TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_roles TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_colaboradores TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_estatus_aplicaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_codigo_fuentes TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_aplicaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_escaneos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_usuarios_por_aplicaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_aplicaciones_por_escaneos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.his_seguimiento_modificaciones TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_lenguajes TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_checkmarx TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia_dev;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_comparaciones_archivos_ia TO sysrvia_dev;
 
 --secuencias
 --sysrvia
@@ -636,30 +610,7 @@ GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_bito_ia_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.ctl_proyectos_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_keyx_seq TO sysrvia;
 
---sysrvia_dev
-GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_checkmarx_keyx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_obsoletos_ia_keyx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_puestos_idu_puesto_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_centros_idu_centro_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_aplicaciones_ia_idu_aplicacion_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_encargados_idu_encargado_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_roles_idu_rol_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_colaboradores_idu_usuario_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.ctl_estatus_aplicaciones_idu_estatus_aplicacion_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.ctl_codigo_fuentes_idu_codigo_fuente_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.mae_aplicaciones_idu_aplicacion_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.mov_escaneos_idu_escaneo_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.mov_comparaciones_archivos_ia_idu_aplicacion_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.ctl_usuarios_por_aplicaciones_idu_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.ctl_aplicaciones_por_escaneos_idu_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.his_seguimiento_modificaciones_idu_seguimiento_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_lenguajes_idu_lenguaje_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.ctl_checkmarx_idu_checkmarx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.mov_costos_proyectos_keyx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.cat_sentencias_ia_keyx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_bito_ia_keyx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.ctl_proyectos_keyx_seq TO sysrvia_dev;
-GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_keyx_seq TO sysrvia_dev;
+
 
 -- INDICES 
 CREATE INDEX IF NOT EXISTS ix_cat_puestos_num_puesto ON public.cat_puestos(num_puesto);
