@@ -1,9 +1,6 @@
 -- **** RVIA ***
 -- TABLAS
 
-
-
-
 CREATE TABLE IF NOT EXISTS public.cat_puestos
 (
 	idu_puesto serial NOT NULL, 
@@ -153,6 +150,7 @@ CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     opc_estatus_caso INT NOT NULL DEFAULT 0,
     opc_estatus_calificar INT NOT NULL DEFAULT 0,
     idu_codigo_fuente INT,
+    idu_aplicacion_de_negocio bigint NOT NULL,
     fec_creacion TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     fec_actualizacion TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT mae_aplicaciones_idu_usuario_fkey FOREIGN KEY (idu_usuario) REFERENCES public.cat_colaboradores(idu_usuario),
@@ -205,13 +203,14 @@ COMMENT ON COLUMN public.mov_escaneos.fec_creacion IS 'Fecha de registro del esc
 
 CREATE TABLE IF NOT EXISTS public.mov_comparaciones_archivos_ia (
     idu_aplicacion SERIAL NOT NULL,
-    idu_proyecto BIGINT NOT NULL UNIQUE,
+    idu_proyecto BIGINT NOT NULL,
     nom_proyecto character varying(100) NOT NULL,
     fec_registro TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     arc_origen TEXT NOT NULL,
     arc_modificado TEXT NOT NULL,
     nom_funcion_obsoleta character varying(100) NOT NULL,
     num_linea INT NOT NULL,
+    CONSTRAINT mov_comparaciones_archivos_ia_idu_aplicacion_fkey FOREIGN KEY (idu_aplicacion) REFERENCES public.mae_aplicaciones(idu_aplicacion),
     PRIMARY KEY (idu_aplicacion)
 );
 
@@ -583,7 +582,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_comparaciones_archivos_ia TO sysrvia;
 
-
 --secuencias
 --sysrvia
 GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_checkmarx_keyx_seq TO sysrvia;
@@ -609,8 +607,6 @@ GRANT USAGE, SELECT ON SEQUENCE public.cat_sentencias_ia_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_bito_ia_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.ctl_proyectos_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_keyx_seq TO sysrvia;
-
-
 
 -- INDICES 
 CREATE INDEX IF NOT EXISTS ix_cat_puestos_num_puesto ON public.cat_puestos(num_puesto);
@@ -1182,151 +1178,3 @@ BEGIN
 END;
 $BODY$;
 ---a3 07/05/25
-
--- ALTER TABLE Y OBJETOS 13/05/25
--- Agregar columna si no existe
-DO $$
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.columns 
-        WHERE table_schema = 'public' AND table_name = 'mae_aplicaciones' AND column_name = 'idu_aplicacion_de_negocio'
-    ) THEN
-        ALTER TABLE public.mae_aplicaciones
-        ADD COLUMN idu_aplicacion_de_negocio BIGINT NOT NULL;
-    END IF;
-END$$;
-
--- Agregar restricción si no existe
-DO $$
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_constraint
-        WHERE conname = 'fk_mae_aplicaciones'
-    ) THEN
-        ALTER TABLE public.mov_comparaciones_archivos_ia
-        ADD CONSTRAINT fk_mae_aplicaciones
-        FOREIGN KEY (idu_aplicacion)
-        REFERENCES public.mae_aplicaciones(idu_aplicacion);
-    END IF;
-END$$;
-
--- Eliminar columna si existe
-DO $$
-BEGIN
-    IF EXISTS (
-        SELECT 1 FROM information_schema.columns 
-        WHERE table_schema = 'public' AND table_name = 'cat_colaboradores' AND column_name = 'idu_aplicacion'
-    ) THEN
-        ALTER TABLE public.cat_colaboradores
-        DROP COLUMN idu_aplicacion;
-    END IF;
-END$$;
-
-DO $$
-BEGIN
-    -- 1. Renombrar la tabla si aún existe con el nombre cat_aplicaciones_ia
-    IF EXISTS (
-        SELECT 1 FROM pg_tables 
-        WHERE schemaname = 'public' AND tablename = 'cat_aplicaciones_IA'
-    ) THEN
-        BEGIN
-            EXECUTE 'ALTER TABLE public.cat_aplicaciones_IA RENAME TO cat_aplicaciones_ia';
-        EXCEPTION WHEN duplicate_table THEN
-            RAISE NOTICE 'La tabla ya tiene el nombre "cat_aplicaciones_ia", no es necesario renombrar.';
-        END;
-    END IF;
-
-    -- 2. Crear o actualizar comentarios en la tabla
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_description 
-        WHERE objoid = 'public.cat_aplicaciones_ia'::regclass AND objsubid = 0
-    ) THEN
-        COMMENT ON TABLE public.cat_aplicaciones_ia IS 'Tabla que contiene la información de las aplicaciones a escanear';
-    END IF;
-
-    -- Comentarios en columna
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_description pd
-        JOIN pg_attribute pa ON pd.objoid = pa.attrelid AND pd.objsubid = pa.attnum
-        WHERE pd.objoid = 'public.cat_aplicaciones_ia'::regclass
-          AND pa.attname = 'idu_aplicacion'
-    ) THEN
-        COMMENT ON COLUMN public.cat_aplicaciones_ia.idu_aplicacion IS 'Consecutivo de los cat_aplicaciones_ia, utilizado como clave primaria y se incrementa automáticamente';
-    END IF;
-
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_description pd
-        JOIN pg_attribute pa ON pd.objoid = pa.attrelid AND pd.objsubid = pa.attnum
-        WHERE pd.objoid = 'public.cat_aplicaciones_ia'::regclass
-          AND pa.attname = 'nom_aplicacion'
-    ) THEN
-        COMMENT ON COLUMN public.cat_aplicaciones_ia.nom_aplicacion IS 'Nombre de la aplicacion';
-    END IF;
-
-    -- 3. Renombrar índice si existe
-IF NOT EXISTS (
-        SELECT 1 FROM pg_class c
-        JOIN pg_namespace n ON n.oid = c.relnamespace
-        WHERE c.relkind = 'i'
-          AND c.relname = 'ix_cat_aplicaciones_ia_nom_aplicacion'
-          AND n.nspname = 'public'
-    ) THEN
-        -- Solo renombrar si el índice no tiene ese nombre
-        BEGIN
-            EXECUTE '
-                ALTER INDEX public.ix_cat_aplicaciones_ia_nom_aplicacion RENAME TO ix_cat_aplicaciones_ia_nom_aplicacion';
-        EXCEPTION WHEN duplicate_object THEN
-            RAISE NOTICE 'El índice ya existe o no es necesario renombrar.';
-        END;
-    ELSE
-        RAISE NOTICE 'El índice ya tiene el nombre deseado, no es necesario renombrar.';
-    END IF;
-
-    -- 4. Eliminar la restricción en 'cat_colaboradores' si existe
-    IF EXISTS (
-        SELECT 1 FROM pg_constraint
-        WHERE conname = 'cat_colaboradores_idu_aplicacion_fkey'
-    ) THEN
-        EXECUTE 'ALTER TABLE public.cat_colaboradores DROP CONSTRAINT IF EXISTS cat_colaboradores_idu_aplicacion_fkey';
-    END IF;
-
-    -- 5. Verificar si la columna 'idu_aplicacion' existe en 'cat_colaboradores'
-    IF EXISTS (
-        SELECT 1 FROM information_schema.columns
-        WHERE table_schema = 'public'
-          AND table_name = 'cat_colaboradores'
-          AND column_name = 'idu_aplicacion'
-    ) THEN
-        -- Solo crear la clave foránea si la columna existe
-        EXECUTE '
-            ALTER TABLE public.cat_colaboradores
-            ADD CONSTRAINT cat_colaboradores_idu_aplicacion_fkey
-            FOREIGN KEY (idu_aplicacion) REFERENCES public.cat_aplicaciones_ia(idu_aplicacion)
-        ';
-    ELSE
-        RAISE NOTICE ' ';
-    END IF;
-END;
-$$ LANGUAGE plpgsql;
-
-DO $$
-DECLARE
-    constraint_name TEXT;
-BEGIN
-    -- Buscamos el nombre de la restricción UNIQUE en la columna 'idu_proyecto'
-    SELECT con.conname INTO constraint_name
-    FROM pg_constraint con
-    JOIN pg_attribute att ON att.attrelid = con.conrelid AND att.attnum = ANY(con.conkey)
-    WHERE con.conrelid = 'public.mov_comparaciones_archivos_ia'::regclass
-      AND con.contype = 'u'
-      AND att.attname = 'idu_proyecto';
-
-    -- Si se encuentra la restricción, eliminarla
-    IF constraint_name IS NOT NULL THEN
-        EXECUTE format('ALTER TABLE public.mov_comparaciones_archivos_ia DROP CONSTRAINT %I', constraint_name);
-        RAISE NOTICE 'Se eliminó la restricción UNIQUE % en la columna idu_proyecto.', constraint_name;
-    ELSE
-        RAISE NOTICE 'No se encontró restricción UNIQUE en la columna idu_proyecto.';
-    END IF;
-END;
-$$ LANGUAGE plpgsql;
