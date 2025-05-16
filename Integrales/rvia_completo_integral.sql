@@ -1,7 +1,6 @@
 -- **** RVIA ***
-
 -- TABLAS
----a1
+
 CREATE TABLE IF NOT EXISTS public.cat_puestos
 (
 	idu_puesto serial NOT NULL, 
@@ -27,16 +26,16 @@ COMMENT ON COLUMN public.cat_centros.idu_centro IS 'Consecutivo del centro, util
 COMMENT ON COLUMN public.cat_centros.num_centro IS 'Número único que identifica al centro, el cual debe ser único en la tabla';
 COMMENT ON COLUMN public.cat_centros.nom_centro IS 'Nombre del centro, que puede incluir información adicional sobre la ubicación o función del mismo';
 
-CREATE TABLE IF NOT EXISTS public.cat_aplicaciones_IA
+CREATE TABLE IF NOT EXISTS public.cat_aplicaciones_ia
 (
 	idu_aplicacion serial NOT NULL, 
     nom_aplicacion character varying(500) NOT NULL,
 	PRIMARY KEY (idu_aplicacion)
 );
 
-COMMENT ON TABLE public.cat_aplicaciones_IA IS 'Tabla que contiene la información de las aplicaciones a escanear';
-COMMENT ON COLUMN public.cat_aplicaciones_IA.idu_aplicacion IS 'Consecutivo de los cat_aplicaciones_IA, utilizado como clave primaria y se incrementa automáticamente';
-COMMENT ON COLUMN public.cat_aplicaciones_IA.nom_aplicacion IS 'Nombre de la aplicacion';
+COMMENT ON TABLE public.cat_aplicaciones_ia IS 'Tabla que contiene la información de las aplicaciones a escanear';
+COMMENT ON COLUMN public.cat_aplicaciones_ia.idu_aplicacion IS 'Consecutivo de los cat_aplicaciones_ia, utilizado como clave primaria y se incrementa automáticamente';
+COMMENT ON COLUMN public.cat_aplicaciones_ia.nom_aplicacion IS 'Nombre de la aplicacion';
 
 CREATE TABLE IF NOT EXISTS public.cat_encargados
 (
@@ -52,7 +51,6 @@ COMMENT ON COLUMN public.cat_encargados.idu_encargado IS 'Consecutivo de los enc
 COMMENT ON COLUMN public.cat_encargados.num_empleado IS 'Número único que identifica a cada empleado dentro de la organización';
 COMMENT ON COLUMN public.cat_encargados.nom_empleado IS 'Nombre del empleado que ocupa el puesto, en un formato suficientemente amplio para incluir nombres compuestos';
 COMMENT ON COLUMN public.cat_encargados.num_puesto IS 'Número del puesto correspondiente al empleado, permitiendo vincular al encargado con su puesto específico en la organización';
----a1
 
 CREATE TABLE IF NOT EXISTS public.cat_roles (
     idu_rol serial NOT NULL,
@@ -76,28 +74,20 @@ COMMENT ON COLUMN public.cat_roles.fec_actualizacion IS 'Fecha de actualización
 
 CREATE TABLE IF NOT EXISTS public.cat_colaboradores (
     idu_usuario serial NOT NULL,
-    ---
-    idu_aplicacion serial NOT NULL,
-    ---
     num_empleado INT NOT NULL UNIQUE,
     nom_usuario TEXT NOT NULL,
     idu_rol INT NOT NULL,
     nom_correo TEXT NOT NULL UNIQUE,
     nom_contrasena TEXT NOT NULL,
-	---
 	num_centro integer NOT NULL,  
     num_puesto smallint NOT NULL,  
     num_encargado INT NULL, 
-	---
     opc_es_activo BOOLEAN NOT NULL DEFAULT true,
     fec_creacion TIMESTAMP NOT NULL DEFAULT now(),
     fec_actualizacion TIMESTAMP NOT NULL DEFAULT now(),
     CONSTRAINT cat_colaboradores_idu_rol_fkey FOREIGN KEY (idu_rol) REFERENCES public.cat_roles(idu_rol),
-    ---
-    CONSTRAINT cat_colaboradores_idu_aplicacion_fkey FOREIGN KEY (idu_aplicacion) REFERENCES public.cat_aplicaciones_IA(idu_aplicacion),
 	CONSTRAINT cat_colaboradores_num_puesto_fkey FOREIGN KEY (num_puesto) REFERENCES public.cat_puestos(num_puesto),
 	CONSTRAINT cat_colaboradores_num_centro_fkey FOREIGN KEY (num_centro) REFERENCES public.cat_centros(num_centro),
-    ---
 	PRIMARY KEY (idu_usuario)
 );
 
@@ -166,10 +156,6 @@ CREATE TABLE IF NOT EXISTS public.mae_aplicaciones (
     CONSTRAINT mae_aplicaciones_idu_usuario_fkey FOREIGN KEY (idu_usuario) REFERENCES public.cat_colaboradores(idu_usuario),
     CONSTRAINT mae_aplicaciones_idu_codigo_fuente_fkey FOREIGN KEY (idu_codigo_fuente) REFERENCES public.ctl_codigo_fuentes(idu_codigo_fuente),
     CONSTRAINT mae_aplicaciones_clv_estatus_fkey FOREIGN KEY (clv_estatus) REFERENCES public.ctl_estatus_aplicaciones(idu_estatus_aplicacion),
-
-    --a2
-    --CONSTRAINT mae_aplicaciones_idu_proyecto_fkey FOREIGN KEY (idu_proyecto) REFERENCES public.mov_comparaciones_archivos_ia(idu_proyecto),
-    --a2
     PRIMARY KEY (idu_aplicacion)
 );
 
@@ -215,20 +201,17 @@ COMMENT ON COLUMN public.mov_escaneos.nom_directorio IS 'Directorio donde se alm
 COMMENT ON COLUMN public.mov_escaneos.idu_aplicacion IS 'Identificador de la aplicación del escaneo';
 COMMENT ON COLUMN public.mov_escaneos.fec_creacion IS 'Fecha de registro del escaneo';
 
---a2
 CREATE TABLE IF NOT EXISTS public.mov_comparaciones_archivos_ia (
     idu_aplicacion SERIAL NOT NULL,
-    idu_proyecto BIGINT NOT NULL UNIQUE,
+    idu_proyecto BIGINT NOT NULL,
     nom_proyecto character varying(100) NOT NULL,
     fec_registro TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     arc_origen TEXT NOT NULL,
     arc_modificado TEXT NOT NULL,
     nom_funcion_obsoleta character varying(100) NOT NULL,
     num_linea INT NOT NULL,
-    PRIMARY KEY (idu_aplicacion),
-	CONSTRAINT fk_mae_aplicaciones
-      FOREIGN KEY (idu_aplicacion)
-      REFERENCES public.mae_aplicaciones(idu_aplicacion)
+    CONSTRAINT mov_comparaciones_archivos_ia_idu_aplicacion_fkey FOREIGN KEY (idu_aplicacion) REFERENCES public.mae_aplicaciones(idu_aplicacion),
+    PRIMARY KEY (idu_aplicacion)
 );
 
 COMMENT ON TABLE public.mov_comparaciones_archivos_ia IS 'Tabla que almacena los registros de archivos antes y después de ser procesados o modificados por la IA, detallando las diferencias entre el archivo original y el archivo modificado.';
@@ -238,7 +221,6 @@ COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.nom_proyecto IS 'Nombre d
 COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.fec_registro IS 'Fecha en que se registro el proyecto';
 COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_origen IS 'Archivo origen';
 COMMENT ON COLUMN public.mov_comparaciones_archivos_ia.arc_modificado IS 'Archivo modificado';
---a2
 
 CREATE TABLE IF NOT EXISTS public.ctl_usuarios_por_aplicaciones (
     idu serial NOT NULL,
@@ -338,8 +320,6 @@ COMMENT ON COLUMN public.mov_costos_proyectos.nom_proyecto IS 'Nombre del Proyec
 COMMENT ON COLUMN public.mov_costos_proyectos.nom_cliente_ia IS 'Nombre del cliente de IA que se utilizó';
 COMMENT ON COLUMN public.mov_costos_proyectos.val_monto IS 'Costo del proyecto por uso de la IA';
 COMMENT ON COLUMN public.mov_costos_proyectos.des_descripcion IS 'Descripción referente al proyecto o costos generados por la IA';
-
--- **** Arturo ****
 
 CREATE TABLE IF NOT EXISTS public.cat_sentencias_ia
 (
@@ -528,7 +508,6 @@ COMMENT ON COLUMN public.tbl_registra_sentencias_ia.keyx IS 'Indicador automáti
 
 -- **** RVIA Prompts ****
 
--- TABLAS
 CREATE TABLE IF NOT EXISTS public.cat_esquemas (
     idu_esquema SERIAL PRIMARY KEY,         
     des_descripcion VARCHAR(255) NOT NULL   
@@ -573,13 +552,11 @@ COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_lenguaje IS 'Identificador 
 COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del prompt creado para ese lenguaje de programación';
 
 -- GRANT PERMISOS PARA CADA TABLA
----a1
+--sysrvia
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_puestos TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_centros TO sysrvia;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_aplicaciones_IA TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_aplicaciones_ia TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_encargados TO sysrvia;
----a1
----***
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_sentencias_ia TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_bito_ia TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_proyectos TO sysrvia;
@@ -588,7 +565,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_totales_checkm
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_obsoletos_ia TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_obsoletos_ia TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_sentencias_ia TO sysrvia;
----***
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_roles TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_colaboradores TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_estatus_aplicaciones TO sysrvia;
@@ -604,152 +580,173 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_costos_proyectos TO sys
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_esquemas TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mae_prompts TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_lenguajes_x_prompts TO sysrvia;
-
---a2
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.mov_comparaciones_archivos_ia TO sysrvia;
---a2
+
+--secuencias
+--sysrvia
+GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_checkmarx_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_obsoletos_ia_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_puestos_idu_puesto_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_centros_idu_centro_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_aplicaciones_ia_idu_aplicacion_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_encargados_idu_encargado_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_roles_idu_rol_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_colaboradores_idu_usuario_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.ctl_estatus_aplicaciones_idu_estatus_aplicacion_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.ctl_codigo_fuentes_idu_codigo_fuente_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.mae_aplicaciones_idu_aplicacion_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.mov_escaneos_idu_escaneo_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.mov_comparaciones_archivos_ia_idu_aplicacion_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.ctl_usuarios_por_aplicaciones_idu_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.ctl_aplicaciones_por_escaneos_idu_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.his_seguimiento_modificaciones_idu_seguimiento_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_lenguajes_idu_lenguaje_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.ctl_checkmarx_idu_checkmarx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.mov_costos_proyectos_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_sentencias_ia_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_bito_ia_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.ctl_proyectos_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_keyx_seq TO sysrvia;
 
 -- INDICES 
----a1
-CREATE INDEX ix_cat_puestos_num_puesto ON public.cat_puestos(num_puesto);
-CREATE INDEX ix_cat_puestos_nom_puesto ON public.cat_puestos(nom_puesto);
-
-CREATE INDEX ix_cat_centros_num_centro ON public.cat_centros(num_centro);
-CREATE INDEX ix_cat_centros_nom_centro ON public.cat_centros(nom_centro);
-
-CREATE INDEX ix_cat_aplicaciones_IA_nom_aplicacion ON public.cat_aplicaciones_IA(nom_aplicacion);
-
-CREATE INDEX ix_cat_encargados_num_empleado ON public.cat_encargados(num_empleado);
-CREATE INDEX ix_cat_encargados_nom_empleado ON public.cat_encargados(nom_empleado);
----a1
-
-CREATE INDEX ix_cat_roles_nom_rol ON public.cat_roles(nom_rol);
-CREATE INDEX ix_cat_roles_num_nivel ON public.cat_roles(num_nivel);
-
-CREATE INDEX ix_cat_colaboradores_num_empleado ON public.cat_colaboradores(num_empleado);
-CREATE INDEX ix_cat_colaboradores_idu_rol ON public.cat_colaboradores(idu_rol);
-CREATE INDEX ix_cat_colaboradores_nom_usuario ON public.cat_colaboradores(nom_usuario);
-CREATE INDEX ix_cat_colaboradores_nom_correo ON public.cat_colaboradores(nom_correo);
-
-CREATE INDEX ix_ctl_estatus_aplicaciones_des_estatus_aplicacion ON public.ctl_estatus_aplicaciones(des_estatus_aplicacion);
-
-CREATE INDEX ix_ctl_codigo_fuentes_nom_codigo_fuente ON public.ctl_codigo_fuentes(nom_codigo_fuente);
-
-CREATE INDEX ix_mae_aplicaciones_idu_usuario ON public.mae_aplicaciones(idu_usuario);
-CREATE INDEX ix_mae_aplicaciones_clv_estatus ON public.mae_aplicaciones(clv_estatus);
-CREATE INDEX ix_mae_aplicaciones_num_accion ON public.mae_aplicaciones(num_accion);
-
-CREATE INDEX ix_mov_escaneos_idu_aplicacion ON public.mov_escaneos(idu_aplicacion);
-
-CREATE INDEX ix_ctl_usuarios_por_aplicaciones_idu_usuario ON public.ctl_usuarios_por_aplicaciones(idu_usuario);
-CREATE INDEX ix_ctl_usuarios_por_aplicaciones_idu_aplicacion ON public.ctl_usuarios_por_aplicaciones(idu_aplicacion);
-
-CREATE INDEX ix_ctl_aplicaciones_por_escaneos_idu_aplicacion ON public.ctl_aplicaciones_por_escaneos(idu_aplicacion);
-CREATE INDEX ix_ctl_aplicaciones_por_escaneos_idu_escaneo ON public.ctl_aplicaciones_por_escaneos(idu_escaneo);
-
-CREATE INDEX ix_cat_lenguajes_nom_lenguaje ON public.cat_lenguajes(nom_lenguaje);
-
-CREATE INDEX ix_ctl_checkmarx_idu_aplicacion ON public.ctl_checkmarx(idu_aplicacion);
-
-CREATE INDEX ix_mov_costos_proyectos_id_proyecto ON public.mov_costos_proyectos(id_proyecto);
-
-CREATE INDEX idx_tbl_registra_totales_num_empleado ON tbl_registra_totales (num_empleado);
-CREATE INDEX idx_tbl_registra_totales_id_proyecto ON tbl_registra_totales (id_proyecto);
-CREATE INDEX idx_tbl_registra_totales_nom_proyecto ON tbl_registra_totales (nom_proyecto);
-CREATE INDEX idx_tbl_registra_totales_nom_language ON tbl_registra_totales (nom_language);
-CREATE INDEX idx_tbl_registra_totales_keyx ON tbl_registra_totales (keyx);
-
-CREATE INDEX idx_tbl_registra_totales_checkmarx_num_empleado ON tbl_registra_totales_checkmarx (num_empleado);
-CREATE INDEX idx_tbl_registra_totales_checkmarx_id_proyecto ON tbl_registra_totales_checkmarx (id_proyecto);
-CREATE INDEX idx_tbl_registra_totales_checkmarx_nom_proyecto ON tbl_registra_totales_checkmarx (nom_proyecto);
-CREATE INDEX idx_tbl_registra_totales_checkmarx_num_high ON tbl_registra_totales_checkmarx (num_high);
-CREATE INDEX idx_tbl_registra_totales_checkmarx_num_medium ON tbl_registra_totales_checkmarx (num_medium);
-CREATE INDEX idx_tbl_registra_totales_checkmarx_num_low ON tbl_registra_totales_checkmarx (num_low);
-CREATE INDEX idx_tbl_registra_totales_checkmarx_keyx ON tbl_registra_totales_checkmarx (keyx);
-
-CREATE INDEX idx_cat_obsoletos_ia_nom_lenguaje ON cat_obsoletos_ia (nom_lenguaje);
-CREATE INDEX idx_cat_obsoletos_ia_fun_obsoleto ON cat_obsoletos_ia (fun_obsoleto);
-CREATE INDEX idx_cat_obsoletos_ia_keyx ON cat_obsoletos_ia (keyx);
-
----***
-CREATE INDEX idx_cat_sentencias_ia_nom_sentencia ON cat_sentencias_ia (nom_sentencia);
-CREATE INDEX idx_cat_sentencias_ia_keyx ON cat_sentencias_ia (keyx);
-
-CREATE INDEX idx_tbl_registra_bito_ia_num_emppleado ON tbl_registra_bito_ia (num_empleado);
-CREATE INDEX idx_tbl_registra_bito_ia_id_proyecto ON tbl_registra_bito_ia (id_proyecto);
-CREATE INDEX idx_tbl_registra_bito_ia_nom_proyecto ON tbl_registra_bito_ia (nom_proyecto);
-CREATE INDEX idx_tbl_registra_bito_ia_keyx ON tbl_registra_bito_ia (keyx);
-
-CREATE INDEX idx_ctl_proyectos_num_empleado ON ctl_proyectos (num_empleado);
-CREATE INDEX idx_ctl_proyectos_id_proyecto ON ctl_proyectos (id_proyecto);
-CREATE INDEX idx_ctl_proyectos_nom_proyecto ON ctl_proyectos (nom_proyecto);
-CREATE INDEX idx_ctl_proyectos_keyx ON ctl_proyectos (keyx);
-
-CREATE INDEX idx_tbl_registra_obsoletos_ia_num_emppleado ON tbl_registra_obsoletos_ia (num_empleado);
-CREATE INDEX idx_tbl_registra_obsoletos_ia_id_proyecto ON tbl_registra_obsoletos_ia (id_proyecto);
-CREATE INDEX idx_tbl_registra_obsoletos_ia_nom_proyecto ON tbl_registra_obsoletos_ia (nom_proyecto);
-CREATE INDEX idx_tbl_registra_obsoletos_ia_keyx ON tbl_registra_obsoletos_ia (keyx);
-
-CREATE INDEX idx_tbl_registra_sentencias_ia_num_empleado ON tbl_registra_sentencias_ia (num_empleado);
-CREATE INDEX idx_tbl_registra_sentencias_ia_id_proyecto ON tbl_registra_sentencias_ia (id_proyecto);
-CREATE INDEX idx_tbl_registra_sentencias_ia_nom_proyecto ON tbl_registra_sentencias_ia (nom_proyecto);
-CREATE INDEX idx_tbl_registra_sentencias_ia_keyx ON tbl_registra_sentencias_ia (keyx);
----***
-CREATE INDEX ix_cat_esquemas_des_descripcion ON public.cat_esquemas(des_descripcion);
-
-CREATE INDEX ix_mae_prompts_idu_esquema ON public.mae_prompts(idu_esquema);
-CREATE INDEX ix_mae_prompts_num_efectividad ON public.mae_prompts(num_efectividad);
-
-CREATE INDEX ix_ctl_lenguajes_x_prompts_idu_lenguaje ON public.ctl_lenguajes_x_prompts(idu_lenguaje);
-CREATE INDEX ix_ctl_lenguajes_x_prompts_idu_prompt ON public.ctl_lenguajes_x_prompts(idu_prompt);
+CREATE INDEX IF NOT EXISTS ix_cat_puestos_num_puesto ON public.cat_puestos(num_puesto);
+CREATE INDEX IF NOT EXISTS ix_cat_puestos_nom_puesto ON public.cat_puestos(nom_puesto);
+CREATE INDEX IF NOT EXISTS ix_cat_centros_num_centro ON public.cat_centros(num_centro);
+CREATE INDEX IF NOT EXISTS ix_cat_centros_nom_centro ON public.cat_centros(nom_centro);
+CREATE INDEX IF NOT EXISTS ix_cat_aplicaciones_ia_nom_aplicacion ON public.cat_aplicaciones_ia(nom_aplicacion);
+CREATE INDEX IF NOT EXISTS ix_cat_encargados_num_empleado ON public.cat_encargados(num_empleado);
+CREATE INDEX IF NOT EXISTS ix_cat_encargados_nom_empleado ON public.cat_encargados(nom_empleado);
+CREATE INDEX IF NOT EXISTS ix_cat_roles_nom_rol ON public.cat_roles(nom_rol);
+CREATE INDEX IF NOT EXISTS ix_cat_roles_num_nivel ON public.cat_roles(num_nivel);
+CREATE INDEX IF NOT EXISTS ix_cat_colaboradores_num_empleado ON public.cat_colaboradores(num_empleado);
+CREATE INDEX IF NOT EXISTS ix_cat_colaboradores_idu_rol ON public.cat_colaboradores(idu_rol);
+CREATE INDEX IF NOT EXISTS ix_cat_colaboradores_nom_usuario ON public.cat_colaboradores(nom_usuario);
+CREATE INDEX IF NOT EXISTS ix_cat_colaboradores_nom_correo ON public.cat_colaboradores(nom_correo);
+CREATE INDEX IF NOT EXISTS ix_ctl_estatus_aplicaciones_des_estatus_aplicacion ON public.ctl_estatus_aplicaciones(des_estatus_aplicacion);
+CREATE INDEX IF NOT EXISTS ix_ctl_codigo_fuentes_nom_codigo_fuente ON public.ctl_codigo_fuentes(nom_codigo_fuente);
+CREATE INDEX IF NOT EXISTS ix_mae_aplicaciones_idu_usuario ON public.mae_aplicaciones(idu_usuario);
+CREATE INDEX IF NOT EXISTS ix_mae_aplicaciones_clv_estatus ON public.mae_aplicaciones(clv_estatus);
+CREATE INDEX IF NOT EXISTS ix_mae_aplicaciones_num_accion ON public.mae_aplicaciones(num_accion);
+CREATE INDEX IF NOT EXISTS ix_mov_escaneos_idu_aplicacion ON public.mov_escaneos(idu_aplicacion);
+CREATE INDEX IF NOT EXISTS ix_ctl_usuarios_por_aplicaciones_idu_usuario ON public.ctl_usuarios_por_aplicaciones(idu_usuario);
+CREATE INDEX IF NOT EXISTS ix_ctl_usuarios_por_aplicaciones_idu_aplicacion ON public.ctl_usuarios_por_aplicaciones(idu_aplicacion);
+CREATE INDEX IF NOT EXISTS ix_ctl_aplicaciones_por_escaneos_idu_aplicacion ON public.ctl_aplicaciones_por_escaneos(idu_aplicacion);
+CREATE INDEX IF NOT EXISTS ix_ctl_aplicaciones_por_escaneos_idu_escaneo ON public.ctl_aplicaciones_por_escaneos(idu_escaneo);
+CREATE INDEX IF NOT EXISTS ix_cat_lenguajes_nom_lenguaje ON public.cat_lenguajes(nom_lenguaje);
+CREATE INDEX IF NOT EXISTS ix_ctl_checkmarx_idu_aplicacion ON public.ctl_checkmarx(idu_aplicacion);
+CREATE INDEX IF NOT EXISTS ix_mov_costos_proyectos_id_proyecto ON public.mov_costos_proyectos(id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_num_empleado ON tbl_registra_totales (num_empleado);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_id_proyecto ON tbl_registra_totales (id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_nom_proyecto ON tbl_registra_totales (nom_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_nom_language ON tbl_registra_totales (nom_language);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_keyx ON tbl_registra_totales (keyx);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_num_empleado ON tbl_registra_totales_checkmarx (num_empleado);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_id_proyecto ON tbl_registra_totales_checkmarx (id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_nom_proyecto ON tbl_registra_totales_checkmarx (nom_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_num_high ON tbl_registra_totales_checkmarx (num_high);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_num_medium ON tbl_registra_totales_checkmarx (num_medium);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_num_low ON tbl_registra_totales_checkmarx (num_low);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_totales_checkmarx_keyx ON tbl_registra_totales_checkmarx (keyx);
+CREATE INDEX IF NOT EXISTS idx_cat_obsoletos_ia_nom_lenguaje ON cat_obsoletos_ia (nom_lenguaje);
+CREATE INDEX IF NOT EXISTS idx_cat_obsoletos_ia_fun_obsoleto ON cat_obsoletos_ia (fun_obsoleto);
+CREATE INDEX IF NOT EXISTS idx_cat_obsoletos_ia_keyx ON cat_obsoletos_ia (keyx);
+CREATE INDEX IF NOT EXISTS idx_cat_sentencias_ia_nom_sentencia ON cat_sentencias_ia (nom_sentencia);
+CREATE INDEX IF NOT EXISTS idx_cat_sentencias_ia_keyx ON cat_sentencias_ia (keyx);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_bito_ia_num_emppleado ON tbl_registra_bito_ia (num_empleado);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_bito_ia_id_proyecto ON tbl_registra_bito_ia (id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_bito_ia_nom_proyecto ON tbl_registra_bito_ia (nom_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_bito_ia_keyx ON tbl_registra_bito_ia (keyx);
+CREATE INDEX IF NOT EXISTS idx_ctl_proyectos_num_empleado ON ctl_proyectos (num_empleado);
+CREATE INDEX IF NOT EXISTS idx_ctl_proyectos_id_proyecto ON ctl_proyectos (id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_ctl_proyectos_nom_proyecto ON ctl_proyectos (nom_proyecto);
+CREATE INDEX IF NOT EXISTS idx_ctl_proyectos_keyx ON ctl_proyectos (keyx);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_obsoletos_ia_num_emppleado ON tbl_registra_obsoletos_ia (num_empleado);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_obsoletos_ia_id_proyecto ON tbl_registra_obsoletos_ia (id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_obsoletos_ia_nom_proyecto ON tbl_registra_obsoletos_ia (nom_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_obsoletos_ia_keyx ON tbl_registra_obsoletos_ia (keyx);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_sentencias_ia_num_empleado ON tbl_registra_sentencias_ia (num_empleado);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_sentencias_ia_id_proyecto ON tbl_registra_sentencias_ia (id_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_sentencias_ia_nom_proyecto ON tbl_registra_sentencias_ia (nom_proyecto);
+CREATE INDEX IF NOT EXISTS idx_tbl_registra_sentencias_ia_keyx ON tbl_registra_sentencias_ia (keyx);
+CREATE INDEX IF NOT EXISTS ix_cat_esquemas_des_descripcion ON public.cat_esquemas(des_descripcion);
+CREATE INDEX IF NOT EXISTS ix_mae_prompts_idu_esquema ON public.mae_prompts(idu_esquema);
+CREATE INDEX IF NOT EXISTS ix_mae_prompts_num_efectividad ON public.mae_prompts(num_efectividad);
+CREATE INDEX IF NOT EXISTS ix_ctl_lenguajes_x_prompts_idu_lenguaje ON public.ctl_lenguajes_x_prompts(idu_lenguaje);
+CREATE INDEX IF NOT EXISTS ix_ctl_lenguajes_x_prompts_idu_prompt ON public.ctl_lenguajes_x_prompts(idu_prompt);
 
 -- TYPE
-CREATE TYPE public.typ_costo AS (
-    num_empleado integer,
-    id_proyecto integer,
-    nom_proyecto character,
-    nom_cliente_ia character,
-    des_descripcion text,
-    val_monto numeric
-);
+-- Crear tipo typ_costo si no existe
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'typ_costo' AND typnamespace = 'public'::regnamespace) THEN
+        CREATE TYPE public.typ_costo AS (
+            num_empleado integer,
+            id_proyecto integer,
+            nom_proyecto character,
+            nom_cliente_ia character,
+            des_descripcion text,
+            val_monto numeric
+        );
+    END IF;
+END$$;
 
-CREATE TYPE typ_prompt_esquema_lenguaje AS ( 
-    idu_prompt INT,
-    body TEXT,
-    fec_creacion DATE,
-    num_efectividad BIGINT,
-    num_accion INT
-);
-COMMENT ON TYPE typ_prompt_esquema_lenguaje IS 
-'Tipo typ_prompt_esquema_lenguaje que representa la estructura que devuelve la función fun_obtener_prompts_por_lenguaje_esquema.
-Sus campos:
-    - idu_prompt: Identificador único del prompt.
-    - body: Contenido del prompt.
-    - fec_creacion: Fecha de creación del prompt.
-    - num_efectividad: Efectividad del prompt.
-    - num_accion: Número de acción del prompt.';
+-- Crear tipo typ_prompt_esquema_lenguaje si no existe
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'typ_prompt_esquema_lenguaje' AND typnamespace = 'public'::regnamespace) THEN
+        CREATE TYPE public.typ_prompt_esquema_lenguaje AS (
+            idu_prompt INT,
+            body TEXT,
+            fec_creacion DATE,
+            num_efectividad BIGINT,
+            num_accion INT
+        );
+        COMMENT ON TYPE typ_prompt_esquema_lenguaje IS 
+        'Tipo typ_prompt_esquema_lenguaje que representa la estructura que devuelve la función fun_obtener_prompts_por_lenguaje_esquema.
+        Sus campos:
+            - idu_prompt: Identificador único del prompt.
+            - body: Contenido del prompt.
+            - fec_creacion: Fecha de creación del prompt.
+            - num_efectividad: Efectividad del prompt.
+            - num_accion: Número de acción del prompt.';
+    END IF;
+END$$;
 
---***
-CREATE TYPE typ_lenguajeyesquema AS (
-    idu_prompt INT,
-    body TEXT,
-    fec_creacion DATE,
-    num_efectividad BIGINT
-);
+-- Crear tipo typ_lenguajeyesquema si no existe
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'typ_lenguajeyesquema' AND typnamespace = 'public'::regnamespace) THEN
+        CREATE TYPE public.typ_lenguajeyesquema AS (
+            idu_prompt INT,
+            body TEXT,
+            fec_creacion DATE,
+            num_efectividad BIGINT
+        );
+    END IF;
+END$$;
 
-CREATE TYPE public.typ_sentencias AS
-(
-    nom_sentencia character varying
-);
+-- Crear tipo typ_sentencias si no existe
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'typ_sentencias' AND typnamespace = 'public'::regnamespace) THEN
+        CREATE TYPE public.typ_sentencias AS (
+            nom_sentencia character varying
+        );
+    END IF;
+END$$;
 
-CREATE TYPE public.typ_obsoletos AS
-(
-    fun_obsoleto character varying
-);
---***
+-- Crear tipo typ_obsoletos si no existe
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'typ_obsoletos' AND typnamespace = 'public'::regnamespace) THEN
+        CREATE TYPE public.typ_obsoletos AS (
+            fun_obsoleto character varying
+        );
+    END IF;
+END$$;
 
--- FUNCION 
-CREATE OR REPLACE FUNCTION fun_insertar_costo_proyecto(
+--FUNCIONES
+CREATE OR REPLACE FUNCTION public.fun_insertar_costo_proyecto(
     bigint,
     bigint,
     character,
@@ -777,7 +774,7 @@ BEGIN
 END;
 $BODY$;
 
-CREATE OR REPLACE FUNCTION fun_obtener_prompts_por_lenguaje_esquema(
+CREATE OR REPLACE FUNCTION public.fun_obtener_prompts_por_lenguaje_esquema(
     idu_lenguaje INT, 
     idu_esquema  INT,
     num_cantidad INT,
@@ -813,7 +810,7 @@ Parámetros:
     - num_cantidad= número máximo de elementos a listar,
     - num_accion= número de acción del prompt';
 
---***
+
 CREATE OR REPLACE FUNCTION public.fun_validar_si_existe_colaborador(
     bigint)
     RETURNS SETOF bigint 
@@ -1060,6 +1057,36 @@ BEGIN
 END
 $BODY$;
 
+CREATE OR REPLACE FUNCTION public.fun_registrar_totales_checkmarx(
+    bigint,
+    bigint,
+    character varying,
+    integer,
+    integer,
+    integer)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+
+DECLARE
+    lNumEmpleado    ALIAS FOR $1;
+    lIDProyecto     ALIAS FOR $2;
+    sNomProyecto    ALIAS FOR $3;
+    iNumHigh        ALIAS FOR $4;
+    iNumMedium      ALIAS FOR $5;
+    iNumLow         ALIAS FOR $6;
+BEGIN   
+    
+    INSERT INTO public.tbl_registra_totales_checkmarx( num_empleado, id_proyecto, nom_proyecto, num_high, num_medium, num_low )
+    VALUES ($1::bigint, $2::bigint, $3::varchar, $4::integer, $5::integer, $6::integer);
+    
+    RETURN 1; --Inserto
+    
+END
+$BODY$;
+
 ---a3 07/05/25
 CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_lenguaje_proyecto(
     iEstatus smallint,
@@ -1133,7 +1160,6 @@ BEGIN
 END;
 $BODY$;
 
-
 CREATE OR REPLACE FUNCTION public.fun_actualizar_estatus_calificar_proyecto(
     iEstatus smallint,
     idProyecto bigint,
@@ -1152,34 +1178,3 @@ BEGIN
 END;
 $BODY$;
 ---a3 07/05/25
-
-CREATE OR REPLACE FUNCTION public.fun_registrar_totales_checkmarx(
-    bigint,
-    bigint,
-    character varying,
-    integer,
-    integer,
-    integer)
-    RETURNS smallint
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE PARALLEL UNSAFE
-AS $BODY$
-
-DECLARE
-    lNumEmpleado    ALIAS FOR $1;
-    lIDProyecto     ALIAS FOR $2;
-    sNomProyecto    ALIAS FOR $3;
-    iNumHigh        ALIAS FOR $4;
-    iNumMedium      ALIAS FOR $5;
-    iNumLow         ALIAS FOR $6;
-BEGIN   
-    
-    INSERT INTO public.tbl_registra_totales_checkmarx( num_empleado, id_proyecto, nom_proyecto, num_high, num_medium, num_low )
-    VALUES ($1::bigint, $2::bigint, $3::varchar, $4::integer, $5::integer, $6::integer);
-    
-    RETURN 1; --Inserto
-    
-END
-$BODY$;
---***
