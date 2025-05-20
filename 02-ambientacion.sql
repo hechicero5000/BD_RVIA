@@ -1654,4 +1654,17 @@ INSERT INTO public.cat_colaboradores (
     true,
     '2025-05-13 19:13:20.060597',
     '2025-05-13 19:13:20.060597'
+),
+(
+   90301379, 
+   'eb437e52a6a374c8bbae81cf25203db9:08d13dc5aeb456ed5b0f3cc6a9d0b3aba4eb24f3a8825f2c0f172e25c1fd6ba7',
+   1, 
+   'cf60a0c7821ed5d8077a1252decaae9e:aad3de37068e40ddbbad4848a7beafba2ba0d427a65f169920394a5d83633a2d',
+   '$2b$10$vwzm3wBshsbVPBqRXFNkP.AXfp3Nc8Aux7RI6.T80Y6oXzRMOFtGO',
+   232490,
+   5,
+   90000004,
+   true,
+   '2025-05-16 17:13:27.189856',
+   '2025-05-16 17:13:27.189856'
 );
