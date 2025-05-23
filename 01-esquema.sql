@@ -1,10 +1,46 @@
 -- **** RVIA ***
 -- TABLAS
 
+CREATE TABLE public.cat_coordinadores (
+    num_coordinador bigint NOT NULL,
+    nom_coordinador character varying(60) NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+CREATE TABLE public.cat_divisionales (
+    num_divisional bigint NOT NULL,
+    nom_divisional character varying(60) NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+CREATE TABLE public.cat_gerentes (
+    num_gerente bigint NOT NULL,
+    nom_gerente character varying(60) NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+CREATE TABLE public.cat_lib_terceros (
+    nom_language character varying(30) NOT NULL,
+    nom_libreria character varying(50) NOT NULL,
+    flg_activo smallint DEFAULT 0 NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+CREATE TABLE public.cat_nacionales (
+    num_nacional bigint NOT NULL,
+    nom_nacional character varying(60) NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS public.cat_puestos
 (
 	idu_puesto serial NOT NULL, 
-    num_puesto smallint NOT NULL UNIQUE,
+    num_puesto bigint NOT NULL UNIQUE,
     nom_puesto character varying(50) NOT NULL,
 	PRIMARY KEY (idu_puesto)
 );
