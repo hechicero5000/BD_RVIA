@@ -8,6 +8,12 @@ CREATE TABLE public.cat_coordinadores (
     keyx integer NOT NULL
 );
 
+COMMENT ON TABLE public.cat_coordinadores IS 'Tabla que almacena información de los coordinadores';
+COMMENT ON COLUMN public.cat_coordinadores.num_coordinador IS 'Número identificador único del coordinador';
+COMMENT ON COLUMN public.cat_coordinadores.nom_coordinador IS 'Nombre completo del coordinador';
+COMMENT ON COLUMN public.cat_coordinadores.fec_movto IS 'Fecha y hora del último movimiento o actualización';
+COMMENT ON COLUMN public.cat_coordinadores.keyx IS 'Clave o identificador adicional del coordinador';
+
 CREATE TABLE public.cat_divisionales (
     num_divisional bigint NOT NULL,
     nom_divisional character varying(60) NOT NULL,
@@ -15,12 +21,24 @@ CREATE TABLE public.cat_divisionales (
     keyx integer NOT NULL
 );
 
+COMMENT ON TABLE public.cat_divisionales IS 'Tabla que almacena información de las divisionales';
+COMMENT ON COLUMN public.cat_divisionales.num_divisional IS 'Número identificador único de la divisional';
+COMMENT ON COLUMN public.cat_divisionales.nom_divisional IS 'Nombre de la divisional';
+COMMENT ON COLUMN public.cat_divisionales.fec_movto IS 'Fecha y hora del último movimiento o actualización';
+COMMENT ON COLUMN public.cat_divisionales.keyx IS 'Clave o identificador adicional de la divisional';
+
 CREATE TABLE public.cat_gerentes (
     num_gerente bigint NOT NULL,
     nom_gerente character varying(60) NOT NULL,
     fec_movto timestamp without time zone DEFAULT now() NOT NULL,
     keyx integer NOT NULL
 );
+
+COMMENT ON TABLE public.cat_gerentes IS 'Tabla que almacena información de los gerentes';
+COMMENT ON COLUMN public.cat_gerentes.num_gerente IS 'Número identificador único del gerente';
+COMMENT ON COLUMN public.cat_gerentes.nom_gerente IS 'Nombre completo del gerente';
+COMMENT ON COLUMN public.cat_gerentes.fec_movto IS 'Fecha y hora del último movimiento o actualización';
+COMMENT ON COLUMN public.cat_gerentes.keyx IS 'Clave o identificador adicional del gerente';
 
 CREATE TABLE public.cat_lib_terceros (
     nom_language character varying(30) NOT NULL,
@@ -30,6 +48,13 @@ CREATE TABLE public.cat_lib_terceros (
     keyx integer NOT NULL
 );
 
+COMMENT ON TABLE public.cat_lib_terceros IS 'Tabla que almacena información sobre bibliotecas o terceros';
+COMMENT ON COLUMN public.cat_lib_terceros.nom_language IS 'Idioma asociado';
+COMMENT ON COLUMN public.cat_lib_terceros.nom_libreria IS 'Nombre de la librería o tercero';
+COMMENT ON COLUMN public.cat_lib_terceros.flg_activo IS 'Indicador de activo (0 = inactivo, 1 = activo)';
+COMMENT ON COLUMN public.cat_lib_terceros.fec_movto IS 'Fecha y hora del último movimiento o actualización';
+COMMENT ON COLUMN public.cat_lib_terceros.keyx IS 'Clave o identificador adicional';
+
 CREATE TABLE public.cat_nacionales (
     num_nacional bigint NOT NULL,
     nom_nacional character varying(60) NOT NULL,
@@ -37,12 +62,24 @@ CREATE TABLE public.cat_nacionales (
     keyx integer NOT NULL
 );
 
+COMMENT ON TABLE public.cat_nacionales IS 'Tabla que almacena información de nacionales';
+COMMENT ON COLUMN public.cat_nacionales.num_nacional IS 'Número identificador del nacional';
+COMMENT ON COLUMN public.cat_nacionales.nom_nacional IS 'Nombre del nacional';
+COMMENT ON COLUMN public.cat_nacionales.fec_movto IS 'Fecha y hora del último movimiento o actualización';
+COMMENT ON COLUMN public.cat_nacionales.keyx IS 'Clave o identificador adicional';
+
 CREATE TABLE public.cat_proveedores (
     num_proveedor smallint NOT NULL,
     nom_proveedor character varying(50) NOT NULL,
     fec_movto timestamp without time zone DEFAULT now() NOT NULL,
     keyx integer NOT NULL
 );
+
+COMMENT ON TABLE public.cat_proveedores IS 'Tabla que almacena información de proveedores';
+COMMENT ON COLUMN public.cat_proveedores.num_proveedor IS 'Número identificador del proveedor';
+COMMENT ON COLUMN public.cat_proveedores.nom_proveedor IS 'Nombre del proveedor';
+COMMENT ON COLUMN public.cat_proveedores.fec_movto IS 'Fecha y hora del último movimiento o actualización';
+COMMENT ON COLUMN public.cat_proveedores.keyx IS 'Clave o identificador adicional';
 
 CREATE TABLE public.tbl_registra_solicitudes (
     fec_registro timestamp without time zone DEFAULT now(),
@@ -81,6 +118,42 @@ CREATE TABLE public.tbl_registra_solicitudes (
     ambiente_pba character varying(10) DEFAULT ''::character varying
 );
 
+COMMENT ON TABLE public.tbl_registra_solicitudes IS 'Tabla que registra las solicitudes relacionadas con proyectos y fases de desarrollo';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fec_registro IS 'Fecha y hora en que se registró la solicitud (por defecto la fecha actual)';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.correo_electronico IS 'Correo electrónico del solicitante';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.aplicacion IS 'Nombre de la aplicación relacionada con la solicitud';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.centro_solicitante IS 'Identificador del centro solicitante';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.nom_centro IS 'Nombre del centro solicitante';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.gerente_solicitante IS 'Nombre del gerente que realiza la solicitud';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.nombre_nacional IS 'Nombre nacional o oficial del solicitante';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.nom_proyecto IS 'Nombre del proyecto asociado a la solicitud';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.tratamiento_realizar_ia IS 'Tratamiento o acción a realizar con IA';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fec_compartida_fuente_resp_ia IS 'Fecha de compartición de la fuente responsable de IA';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.estatus_actual IS 'Estado actual de la solicitud';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.num_fuentes_modificadas IS 'Número de fuentes modificadas durante el proceso';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_ambientacion_inicio IS 'Fecha de inicio de la fase de ambientación';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_ambientacion_fin IS 'Fecha de fin de la fase de ambientación';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_desarrollo_tunning_inicio IS 'Fecha de inicio de la fase de desarrollo y tuning';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_desarrollo_tunning_fin IS 'Fecha de fin de la fase de desarrollo y tuning';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_pruebas_inicio IS 'Fecha de inicio de la fase de pruebas';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_pruebas_fin IS 'Fecha de fin de la fase de pruebas';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_liberacion_inicio IS 'Fecha de inicio de la fase de liberación';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.fase_liberacion_fin IS 'Fecha de fin de la fase de liberación';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.nombre_centro_del_solicitante IS 'Nombre del centro del solicitante';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.nombre_nacional_solicitante IS 'Nombre nacional del solicitante';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.modificar_codigo IS 'Código para modificaciones relacionadas';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.actualizar_version_codigo IS 'Código para actualización de versiones';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.columna_17 IS 'Campo adicional o personalizado (nombre genérico)';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.columna_12 IS 'Otro campo adicional (nombre genérico)';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.ejecuto_ia IS 'Indicador si se ejecutó IA ("si", "no", etc.)';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.total_vulne_checkmarx_inicio IS 'Total de vulnerabilidades en inicio en Checkmarx';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.total_vulne_checkmarx_fin IS 'Total de vulnerabilidades en fin en Checkmarx';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.estatus IS 'Estado general de la solicitud';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.calificacion_funcionalidad IS 'Calificación de funcionalidad';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.situacion_mitigar IS 'Situación o acciones de mitigación';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.ecenario IS 'Escenario o contexto';
+COMMENT ON COLUMN public.tbl_registra_solicitudes.ambiente_pba IS 'Ambiente PBA (puede ser un campo indicativo o de categoría)';
+
 CREATE TABLE public.tbl_registra_items_checkmarx (
     num_empleado bigint NOT NULL,
     id_proyecto bigint NOT NULL,
@@ -104,6 +177,28 @@ CREATE TABLE public.tbl_registra_items_checkmarx (
     keyx integer NOT NULL
 );
 
+COMMENT ON TABLE public.tbl_registra_items_checkmarx IS 'Tabla que almacena ítems detectados por Checkmarx';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.num_empleado IS 'Número de empleado asociado al ítem';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.id_proyecto IS 'Identificador del proyecto';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_proyecto IS 'Nombre del proyecto';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.num_id IS 'ID del ítem detectado';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.fec_detection_date IS 'Fecha de detección del ítem (formato variado)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.rut_direct_link IS 'Enlace directo a la fuente del ítem';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.fun_query_name IS 'Nombre de la consulta o función relacionada';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_source_folder IS 'Carpeta fuente del archivo';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_source_filename IS 'Nombre del archivo fuente';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.num_surce_line IS 'Número de línea en la fuente';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_source_object IS 'Objeto fuente (por ejemplo, clase o método)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_destination_folder IS 'Carpeta destino del archivo';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_destination_filename IS 'Nombre del archivo destino';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.num_destination_line IS 'Número de línea en el destino';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_destination_object IS 'Objeto destino (por ejemplo, clase o método)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_result_state IS 'Estado del resultado (por ejemplo, abierto, cerrado)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.num_severity IS 'Nivel de severidad (número)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.nom_result_severity IS 'Severidad del resultado (descriptivo)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.fec_movto IS 'Fecha y hora del movimiento o registro (por defecto ahora)';
+COMMENT ON COLUMN public.tbl_registra_items_checkmarx.keyx IS 'Clave o identificador adicional';
+
 
 CREATE TABLE public.ctl_token_ia (
     num_empleado bigint NOT NULL,
@@ -112,6 +207,13 @@ CREATE TABLE public.ctl_token_ia (
     fec_movto timestamp without time zone DEFAULT now() NOT NULL,
     keyx integer NOT NULL
 );
+
+COMMENT ON TABLE public.ctl_token_ia IS 'Tabla que almacena los tokens de autenticación de IA';
+COMMENT ON COLUMN public.ctl_token_ia.num_empleado IS 'Número de empleado asociado al token';
+COMMENT ON COLUMN public.ctl_token_ia.key_token IS 'Clave o token de autenticación';
+COMMENT ON COLUMN public.ctl_token_ia.fec_expira IS 'Fecha y hora de expiración del token';
+COMMENT ON COLUMN public.ctl_token_ia.fec_movto IS 'Fecha y hora del último movimiento o actualización (por defecto la fecha actual)';
+COMMENT ON COLUMN public.ctl_token_ia.keyx IS 'Clave o identificador adicional';
 
 CREATE TABLE public.ctl_metricas_por_lenguaje (
     nom_lenguaje character varying(50) NOT NULL,
@@ -124,6 +226,13 @@ CREATE TABLE public.ctl_metricas_por_lenguaje (
     CONSTRAINT ctl_metricas_por_lenguaje_tip_actividad_check CHECK ((upper((tip_actividad)::text) = (tip_actividad)::text))
 );
 
+COMMENT ON TABLE public.ctl_metricas_por_lenguaje IS 'Tabla que almacena métricas por lenguaje y tipo de actividad';
+COMMENT ON COLUMN public.ctl_metricas_por_lenguaje.nom_lenguaje IS 'Nombre del lenguaje de programación';
+COMMENT ON COLUMN public.ctl_metricas_por_lenguaje.tip_actividad IS 'Tipo de actividad (por ejemplo, migración, revisión)';
+COMMENT ON COLUMN public.ctl_metricas_por_lenguaje.migracion_meta IS 'Meta de migraciones para ese lenguaje';
+COMMENT ON COLUMN public.ctl_metricas_por_lenguaje.vulnerabilidades_meta IS 'Meta de vulnerabilidades identificadas (opcional)';
+COMMENT ON COLUMN public.ctl_metricas_por_lenguaje.fec_movto IS 'Fecha y hora del último movimiento o actualización (por defecto la fecha actual)';
+COMMENT ON COLUMN public.ctl_metricas_por_lenguaje.keyx IS 'Clave o identificador adicional';
 
 CREATE TABLE IF NOT EXISTS public.cat_puestos
 (
@@ -677,6 +786,16 @@ COMMENT ON COLUMN public.ctl_lenguajes_x_prompts.idu_prompt IS 'Identificado del
 
 -- GRANT PERMISOS PARA CADA TABLA
 --sysrvia
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_coordinadores TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_divisionales TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_gerentes TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_lib_terceros TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_nacionales TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_proveedores TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_solicitudes TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.tbl_registra_items_checkmarx TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_token_ia TO sysrvia;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ctl_metricas_por_lenguaje TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_puestos TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_centros TO sysrvia;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.cat_aplicaciones_ia TO sysrvia;
@@ -731,6 +850,10 @@ GRANT USAGE, SELECT ON SEQUENCE public.cat_sentencias_ia_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_bito_ia_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.ctl_proyectos_keyx_seq TO sysrvia;
 GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_totales_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_obsoletos_ia_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.tbl_registra_sentencias_ia_keyx_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.cat_esquemas_idu_esquema_seq TO sysrvia;
+GRANT USAGE, SELECT ON SEQUENCE public.mae_prompts_idu_prompt_seq TO sysrvia;
 
 -- INDICES 
 CREATE INDEX IF NOT EXISTS ix_cat_puestos_num_puesto ON public.cat_puestos(num_puesto);
