@@ -37,6 +37,94 @@ CREATE TABLE public.cat_nacionales (
     keyx integer NOT NULL
 );
 
+CREATE TABLE public.cat_proveedores (
+    num_proveedor smallint NOT NULL,
+    nom_proveedor character varying(50) NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+CREATE TABLE public.tbl_registra_solicitudes (
+    fec_registro timestamp without time zone DEFAULT now(),
+    correo_electronico character varying(100),
+    aplicacion character varying(100),
+    centro_solicitante bigint,
+    nom_centro character varying(100),
+    gerente_solicitante character varying(100),
+    nombre_nacional character varying(100),
+    nom_proyecto character varying(100) DEFAULT ''::character varying,
+    tratamiento_realizar_ia character varying(100) DEFAULT ''::character varying,
+    fec_compartida_fuente_resp_ia character varying(50) DEFAULT ''::character varying,
+    estatus_actual character varying(50) DEFAULT ''::character varying,
+    num_fuentes_modificadas character varying(50) DEFAULT ''::character varying,
+    fase_ambientacion_inicio character varying(50) DEFAULT ''::character varying,
+    fase_ambientacion_fin character varying(50) DEFAULT ''::character varying,
+    fase_desarrollo_tunning_inicio character varying(50) DEFAULT ''::character varying,
+    fase_desarrollo_tunning_fin character varying(50) DEFAULT ''::character varying,
+    fase_pruebas_inicio character varying(50) DEFAULT ''::character varying,
+    fase_pruebas_fin character varying(50) DEFAULT ''::character varying,
+    fase_liberacion_inicio character varying(50) DEFAULT ''::character varying,
+    fase_liberacion_fin character varying(50) DEFAULT ''::character varying,
+    nombre_centro_del_solicitante character varying(100) DEFAULT ''::character varying,
+    nombre_nacional_solicitante character varying(100) DEFAULT ''::character varying,
+    modificar_codigo character varying(50) DEFAULT ''::character varying,
+    actualizar_version_codigo character varying(50) DEFAULT ''::character varying,
+    columna_17 character varying(50) DEFAULT ''::character varying,
+    columna_12 character varying(50) DEFAULT ''::character varying,
+    ejecuto_ia character varying(10) DEFAULT ''::character varying,
+    total_vulne_checkmarx_inicio character varying(50) DEFAULT ''::character varying,
+    total_vulne_checkmarx_fin character varying(50) DEFAULT ''::character varying,
+    estatus character varying(50) DEFAULT ''::character varying,
+    calificacion_funcionalidad character varying(10) DEFAULT ''::character varying,
+    situacion_mitigar character varying(300) DEFAULT ''::character varying,
+    ecenario character varying(300) DEFAULT ''::character varying,
+    ambiente_pba character varying(10) DEFAULT ''::character varying
+);
+
+CREATE TABLE public.tbl_registra_items_checkmarx (
+    num_empleado bigint NOT NULL,
+    id_proyecto bigint NOT NULL,
+    nom_proyecto character varying(100) NOT NULL,
+    num_id integer NOT NULL,
+    fec_detection_date character varying(30) NOT NULL,
+    rut_direct_link character varying(200) NOT NULL,
+    fun_query_name character varying(100) NOT NULL,
+    nom_source_folder character varying(200) NOT NULL,
+    nom_source_filename character varying(100) NOT NULL,
+    num_surce_line character varying(10) NOT NULL,
+    nom_source_object character varying(100) NOT NULL,
+    nom_destination_folder character varying(100) NOT NULL,
+    nom_destination_filename character varying(100) NOT NULL,
+    num_destination_line character varying(10) NOT NULL,
+    nom_destination_object character varying(100) NOT NULL,
+    nom_result_state character varying(50) NOT NULL,
+    num_severity character varying(10) NOT NULL,
+    nom_result_severity character varying(10) NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+
+CREATE TABLE public.ctl_token_ia (
+    num_empleado bigint NOT NULL,
+    key_token character varying(200) NOT NULL,
+    fec_expira timestamp without time zone NOT NULL,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL
+);
+
+CREATE TABLE public.ctl_metricas_por_lenguaje (
+    nom_lenguaje character varying(50) NOT NULL,
+    tip_actividad character varying(15) NOT NULL,
+    migracion_meta integer NOT NULL,
+    vulnerabilidades_meta integer,
+    fec_movto timestamp without time zone DEFAULT now() NOT NULL,
+    keyx integer NOT NULL,
+    CONSTRAINT ctl_metricas_por_lenguaje_nom_lenguaje_check CHECK ((upper((nom_lenguaje)::text) = (nom_lenguaje)::text)),
+    CONSTRAINT ctl_metricas_por_lenguaje_tip_actividad_check CHECK ((upper((tip_actividad)::text) = (tip_actividad)::text))
+);
+
+
 CREATE TABLE IF NOT EXISTS public.cat_puestos
 (
 	idu_puesto serial NOT NULL, 
