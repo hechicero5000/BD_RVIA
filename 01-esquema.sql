@@ -534,7 +534,7 @@ COMMENT ON COLUMN public.ctl_checkmarx.nom_directorio IS 'Directorio donde se al
 COMMENT ON COLUMN public.ctl_checkmarx.idu_aplicacion IS 'Identificador de la aplicación a la que pertenece el csv';
 COMMENT ON COLUMN public.ctl_checkmarx.fec_creacion IS 'Fecha de registro del csv';
 
-CREATE TABLE public.ctl_costos_tokens (
+CREATE TABLE IF NOT EXISTS public.ctl_costos_tokens (
     idu_costos_tokens SERIAL PRIMARY KEY,
     imp_costo_por_consulta DECIMAL(10,4) NOT NULL,
     imp_costo_por_consulta_extra DECIMAL(10,4),
