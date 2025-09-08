@@ -534,7 +534,7 @@ COMMENT ON COLUMN public.ctl_checkmarx.nom_directorio IS 'Directorio donde se al
 COMMENT ON COLUMN public.ctl_checkmarx.idu_aplicacion IS 'Identificador de la aplicación a la que pertenece el csv';
 COMMENT ON COLUMN public.ctl_checkmarx.fec_creacion IS 'Fecha de registro del csv';
 
-CREATE TABLE ctl_costos_tokens (
+CREATE TABLE IF NOT EXISTS public.ctl_costos_tokens (
     idu_costos_tokens SERIAL PRIMARY KEY,
     imp_costo_por_consulta DECIMAL(10,4) NOT NULL,
     imp_costo_por_consulta_extra DECIMAL(10,4),
@@ -545,15 +545,15 @@ CREATE TABLE ctl_costos_tokens (
     des_descripcion TEXT
 );
 
-COMMENT ON TABLE ctl_costos_tokens IS 'Tabla para almacenar los costos y consumo de tokens';
-COMMENT ON COLUMN ctl_costos_tokens.idu_costos_tokens IS 'Identificador único de registro';
-COMMENT ON COLUMN ctl_costos_tokens.imp_costo_por_consulta IS 'Costo por consulta en dólares hasta 600 consultas';
-COMMENT ON COLUMN ctl_costos_tokens.imp_costo_por_consulta_extra IS 'Costo por consulta adicional después de 600 consultas';
-COMMENT ON COLUMN ctl_costos_tokens.num_consultas_consumidas IS 'Número de consultas ya consumidas';
-COMMENT ON COLUMN ctl_costos_tokens.num_consultas_total IS 'Límite de consultas por licencia (ejemplo: 600)';
-COMMENT ON COLUMN ctl_costos_tokens.imp_costo_total IS 'Costo total acumulado en dólares';
-COMMENT ON COLUMN ctl_costos_tokens.fec_fecha_actualizacion IS 'Fecha de la última actualización del registro';
-COMMENT ON COLUMN ctl_costos_tokens.des_descripcion IS 'Notas o detalles adicionales sobre el registro';
+COMMENT ON TABLE public.ctl_costos_tokens IS 'Tabla para almacenar los costos y consumo de tokens';
+COMMENT ON COLUMN public.ctl_costos_tokens.idu_costos_tokens IS 'Identificador único de registro';
+COMMENT ON COLUMN public.ctl_costos_tokens.imp_costo_por_consulta IS 'Costo por consulta en dólares hasta 600 consultas';
+COMMENT ON COLUMN public.ctl_costos_tokens.imp_costo_por_consulta_extra IS 'Costo por consulta adicional después de 600 consultas';
+COMMENT ON COLUMN public.ctl_costos_tokens.num_consultas_consumidas IS 'Número de consultas ya consumidas';
+COMMENT ON COLUMN public.ctl_costos_tokens.num_consultas_total IS 'Límite de consultas por licencia (ejemplo: 600)';
+COMMENT ON COLUMN public.ctl_costos_tokens.imp_costo_total IS 'Costo total acumulado en dólares';
+COMMENT ON COLUMN public.ctl_costos_tokens.fec_fecha_actualizacion IS 'Fecha de la última actualización del registro';
+COMMENT ON COLUMN public.ctl_costos_tokens.des_descripcion IS 'Notas o detalles adicionales sobre el registro';
 
 CREATE TABLE IF NOT EXISTS public.mov_costos_proyectos (
     num_empleado bigint NOT NULL,
